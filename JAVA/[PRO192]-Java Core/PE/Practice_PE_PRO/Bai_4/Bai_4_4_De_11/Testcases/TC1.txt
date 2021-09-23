@@ -1,0 +1,21 @@
+TEST CASE 1
+INPUT:
+3
+Banana Cake
+2.5
+10
+Donust Cake
+4.0
+5
+KD Cake
+3.8
+12
+OUTPUT:
+1
+KD Cake
+REMOVE_SPACES:
+YES
+CASE_SENSITIVE:
+NO
+MARK:
+2.0
