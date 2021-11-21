@@ -22,7 +22,11 @@ public class main {
     public static void main(String[] args) throws ParseException {
         ArrayList<Task> list = new ArrayList<>();
         Scanner sc= new Scanner(System.in);
-        list.add(new Task(1,"TH",2,"December-12-2021",10.0,12.0,"lead","lead"));
+    list.add(new Task(1,"TH",2,"December-12-2021",10.0,12.0,"lead","lead"));
+    list.add(new Task(2,"TH",2,"December-12-2021",10.0,12.0,"lead","lead"));
+    list.add(new Task(3,"TH",2,"December-12-2021",10.0,12.0,"lead","lead"));
+    list.add(new Task(4,"TH",2,"December-12-2021",10.0,12.0,"lead","lead"));
+    
         Validate v= new Validate();
         Option o= new Option();
         Task t= new Task();

@@ -75,24 +75,18 @@ public class Validate {
     return numd;
     }
     
-    public int getIDtoadd(ArrayList<Task> list){
-        int newID;
+    public int getLastID(ArrayList<Task> list){
+        int lastID;
         if(!list.isEmpty()){
             int lastIndex= list.size()-1;
-            int lastID=list.get(lastIndex).getId();
-            newID=lastID +1;
+             lastID=list.get(lastIndex).getId();  
         }else{
-            int lastID=0;
-            newID=lastID +1;
+             lastID=0;
         }
-        return newID;
-    }
-    
-    public int LastID(ArrayList<Task> list){
-        int lastIndex= list.size()-1;
-        int lastID=list.get(lastIndex).getId();
         return lastID;
     }
+    
+    
     
     public String InputDateTimeToadd(String Mess, String format){
     SimpleDateFormat SDF= new SimpleDateFormat(format);
@@ -111,28 +105,28 @@ public class Validate {
     }
       
     //Update
-    public String InputDTUpdate(String Mess,String regex) {
-    SimpleDateFormat SDF= new SimpleDateFormat(regex);
+    public String InputDTUpdate(String Mess,String format) {
+    SimpleDateFormat SDF= new SimpleDateFormat(format);
     SDF.setLenient(false);
     do{
+        System.out.print(Mess);
+        String date= sc.nextLine();
+        if(date.equalsIgnoreCase("nope")) return"nope";
         try {
-            System.out.print(Mess);
-            String date= sc.nextLine();
-            if(date.equalsIgnoreCase("nope")) return"T";
             SDF.parse(date);
             return date;
         } catch (ParseException e) {
-            System.out.println("Invalid input,plz Enter by format again: '"+regex+"'");
+            System.out.println("Invalid input,plz Enter by format again: '"+format+"'");
         }
     }while(true);
     }
     
     public String InputDoubleUD(double x, double y,String mess){
         String a;
-        while(true){
+        do{
             System.out.print(mess);
             a=sc.nextLine();
-            if(a.equalsIgnoreCase("Nope"))  return "T";
+            if(a.equalsIgnoreCase("Nope"))  return "nope";
             try {
                 Double b=Double.parseDouble(a);  
                 if(x<=b && b<=y){
@@ -144,17 +138,17 @@ public class Validate {
             } catch (NumberFormatException e) {
                 System.err.println("Enter Time From "+x+" -> "+y);
             }
-        }
+        }while(true);
         return a;
      }
     
     public String InputTypeIDUD(int x, int y){
         String a;
         while(true){
+            System.out.print("Input TypeID: ");
+            a=sc.nextLine();
+            if(a.equalsIgnoreCase("Nope")) return"nope";
             try {
-                System.out.print("Input TypeID: ");
-                a=sc.nextLine();
-                if(a.equalsIgnoreCase("Nope")) return"T";
                 int b=Integer.parseInt(a);
                 if(x<=b && b<=y){
                     break;
