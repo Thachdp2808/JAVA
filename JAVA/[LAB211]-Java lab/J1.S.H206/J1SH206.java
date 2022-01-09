@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author Buta
  */
 public class J1SH206 {
-    public static int CheckInt(String Mess){
+        public static int CheckInt(String Mess){
         Scanner sc= new Scanner(System.in);
     int num;
     do{
@@ -29,14 +29,7 @@ public class J1SH206 {
     }while(true);
     return num;
 }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        Scanner sc= new Scanner(System.in);
-        int i,j,k;
-        int min = CheckInt("Input Min: ");
-        int max= CheckInt("Input Max: ");
+    public static void CheckInput(int min, int max){
         do{
            if(max>=min ){
                break;
@@ -54,6 +47,10 @@ public class J1SH206 {
                     
             }
         }while(true);
+    }
+    public static void SquareNumber(int min,int max){
+        int i,j,k;
+        
         for( i =min ; i<=max;i++){
             for( j=i ; j<=max;j++){
                 System.out.print(j);
@@ -64,10 +61,21 @@ public class J1SH206 {
             System.out.println();
     }
     }
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+        int min = CheckInt("Input Min: ");
+        int max= CheckInt("Input Max: ");
+        CheckInput(min,max);
+        SquareNumber(min,max);
+    }
 //    12345
 //    23451
 //    34512
 //    45123
 //    51234
+    
     
 }
