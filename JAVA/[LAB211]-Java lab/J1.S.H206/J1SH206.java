@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author Buta
  */
 public class J1SH206 {
-        public static int CheckInt(String Mess){
+    public static int CheckInt(String Mess){
         Scanner sc= new Scanner(System.in);
     int num;
     do{
@@ -29,7 +29,14 @@ public class J1SH206 {
     }while(true);
     return num;
 }
-    public static void CheckInput(int min, int max){
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+        int i,j,k;
+        int min = CheckInt("Input Min: ");
+        int max= CheckInt("Input Max: ");
         do{
            if(max>=min ){
                break;
@@ -47,35 +54,51 @@ public class J1SH206 {
                     
             }
         }while(true);
-    }
-    public static void SquareNumber(int min,int max){
-        int i,j,k;
-        
-        for( i =min ; i<=max;i++){
-            for( j=i ; j<=max;j++){
+        for( i =min ; i<=max;i++){  // sử dụng for i chạy từ min đến max
+            for( j=i ; j<=max;j++){ // j chạy bắt đàu từ i cho đến max > in ra các phần tử
                 System.out.print(j);
             }
-            for(k=0;k<i-min;k++){
-                System.out.print(k+min);
+            for(k=0;k<i-min;k++){   //k chạy từ k=0 đến k<i-min > nhưng ở for này i bằng min > i-min =0
+                System.out.print(k+min);// for ko chạy 
             }
             System.out.println();
     }
-    }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        Scanner sc= new Scanner(System.in);
-        int min = CheckInt("Input Min: ");
-        int max= CheckInt("Input Max: ");
-        CheckInput(min,max);
-        SquareNumber(min,max);
-    }
-//    12345
-//    23451
-//    34512
-//    45123
-//    51234
+    } /*
+    1 đến 5
+    12345
+    23451
+    34512
+    45123
+    i = min =1
+        j=i=1 
+            prinf :1
+        j =2
+            prinf : 2
+        j =3
+            prinf : 3
+        j =4
+            prinf : 4
+        j =5
+            prinf : 5
+        
+        k = 0 => k < i- min => k = 1-1=0 > ko chạy 
+    i = min =2
+        j =2
+            prinf : 2
+        j =3
+            prinf : 3
+        j =4
+            prinf : 4
+        j =5
+            prinf : 5
+        
+        k = 0 => k < i- min => k = 2-1=1 
+            k=0 > k = 
     
     
+    
+    
+    
+    
+    */
 }
