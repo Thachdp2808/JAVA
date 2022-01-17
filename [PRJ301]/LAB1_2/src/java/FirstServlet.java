@@ -29,18 +29,74 @@ public class FirstServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet FirstServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet FirstServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        PrintWriter out = response.getWriter();
+        int a1 = Integer.parseInt(request.getParameter("a").trim());
+        int b1 = Integer.parseInt(request.getParameter("b").trim());
+        String dau = request.getParameter("option");
+        double result = 0;
+        if(dau.equals("+")){
+            result=a1+b1;
+        }else if(dau.equals("-")){
+            result=a1-b1;
+        }else if(dau.equals("*")){
+            result=a1*b1;
+        }else{
+            if(b1==0){
+                out.println("loi");
+            }else{
+                result=a1/b1;
+            }
         }
+        response.setContentType("text/html");
+            
+            out.println("<!DOCTYPE html>\n"
+                    + "<!--\n"
+                    + "To change this license header, choose License Headers in Project Properties.\n"
+                    + "To change this template file, choose Tools | Templates\n"
+                    + "and open the template in the editor.\n"
+                    + "-->\n"
+                    + "<html>\n"
+                    + "    <head>\n"
+                    + "        <title>Calculator</title>\n"
+                    + "        <meta charset=\"UTF-8\">\n"
+                    + "        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+                    + "    </head>\n"
+                    + "    <body>\n"
+                    + "        <form action=\"FirstServlet\" method=\"post\">\n"
+                    + "            <table> \n"
+                    + "                <tr>\n"
+                    + "                    <td>First:</td><td><input type=\"text\" name=\"a\" value="+a1+"></td>\n"
+                    + "                </tr>\n"
+                    + "                <tr>\n"
+                    + "                    <td>Second:</td><td><input type=\"text\" name=\"b\" value="+b1+"></td>\n"
+                    + "                </tr>\n"
+                    + "                <tr>\n"
+                    + "                    <td>Operator:</td>\n"
+                    + "                    <td>\n"
+                    + "                        <select name=\"option\">\n"
+                    + "                            <option>+</option>\n"
+                    + "                            <option>-</option>\n"
+                    + "                            <option>*</option>\n"
+                    + "                            <option>/</option>\n"
+                    + "                        </select>\n"
+                    + "                    </td>\n"
+                    + "                </tr>\n"
+                    + "                <tr>\n"
+                    + "                    <td></td>\n"
+                    + "                    <td><input type=\"submit\" value=\"Compute\"></td>\n"
+                    + "                </tr>\n"
+                    + "                <tr>\n"
+                    + "                    <td>Results:</td><td><input type=\"text\" value="+result+"></td>\n"
+                    + "                </tr>\n"
+                    + "            </table>\n"
+                    + "        </form>  \n"
+                    + "        </form>  \n"
+                    + "    </body>\n"
+                    + "</html>\n"
+                    + "");
+            
+            
+            
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -55,15 +111,7 @@ public class FirstServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        int a1 = Integer.parseInt(request.getParameter("a"));
-        int b1 = Integer.parseInt(request.getParameter("b"));
-        String dau = request.getParameter("Operator");
-        int sum=a1+b1;
-        if(dau.equals("+")){
-            out.println("đâsdasdasdasda"+sum);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -77,7 +125,7 @@ public class FirstServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**
