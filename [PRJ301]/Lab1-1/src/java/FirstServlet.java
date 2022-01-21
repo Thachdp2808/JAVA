@@ -71,18 +71,15 @@ public class FirstServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String user = request.getParameter("user");
-        String passw = request.getParameter("pass");
+        String pass= request.getParameter("pass");
         ServletConfig sc = getServletConfig();
-        String User =sc.getInitParameter("Username");
-        String pass = sc.getInitParameter("Password");
-        response.setContentType("text/html");
-        
-        if(user.equals(User) && passw.equals(pass)){
-           request.getRequestDispatcher("WelcomeServlet").forward(request, response);
+        String u = sc.getInitParameter("User");
+        String p = sc.getInitParameter("Password");
+        if(user.equals(u) && pass.equals(p)){
+            request.getRequestDispatcher("WelcomeServlet").forward(request, response);
         }else{
-            response.sendRedirect("index.html");
+            response.sendRedirect("login.html");
         }
-
     }
 
     /**

@@ -29,23 +29,74 @@ public class FirstServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet FirstServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet FirstServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }  
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        int a1 = Integer.parseInt(request.getParameter("a").trim());
-        int b1 = Integer.parseInt(request.getParameter("b").trim());
-        String dau = request.getParameter("option");
-        double result = 0;
-        if(dau.equals("+")){
-            result=a1+b1;
-        }else if(dau.equals("-")){
-            result=a1-b1;
-        }else if(dau.equals("*")){
-            result=a1*b1;
-        }else{
-            if(b1==0){
-                out.println("loi");
-            }else{
-                result=a1/b1;
-            }
+        double a1=0;
+        double b1=0;
+        try {
+             a1 = Double.parseDouble(request.getParameter("a").trim());
+             b1 = Double.parseDouble(request.getParameter("b").trim());
+        } catch (NumberFormatException e) {
+            response.sendRedirect("index.html");
+        }
+        String op = request.getParameter("option");
+        String result = null;
+        switch (op) {
+            case "+":
+                result=String.valueOf(a1 + b1);
+                break;
+            case "-":
+                result=String.valueOf(a1 - b1);
+                break;
+            case "*":
+                result=String.valueOf(a1 * b1);
+                break;
+            case "/":
+                if(b1==0){
+                    result="Error";
+                }else{
+                    result=String.valueOf(a1 / b1);
+                }   break;
         }
         response.setContentType("text/html");
             
@@ -90,42 +141,9 @@ public class FirstServlet extends HttpServlet {
                     + "                </tr>\n"
                     + "            </table>\n"
                     + "        </form>  \n"
-                    + "        </form>  \n"
                     + "    </body>\n"
                     + "</html>\n"
                     + "");
-            
-            
-            
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**
