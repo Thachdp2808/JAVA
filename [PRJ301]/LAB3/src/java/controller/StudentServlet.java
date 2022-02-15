@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletConfig;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Student;
+import DAL.StudentDAO;
 
-/**
- *
- * @author Happy-2001
- */
-public class FirstServlet extends HttpServlet {
+
+public class StudentServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,15 +32,10 @@ public class FirstServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet FirstServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet FirstServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            StudentDAO u = new StudentDAO();
+            List<Student> lst = u.getStudents();
+            request.setAttribute("lst", lst);
+            request.getRequestDispatcher("../list.jsp").forward(request, response);
         }
     }
 
@@ -70,25 +65,7 @@ public class FirstServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String user = request.getParameter("user");
-        String pass= request.getParameter("pass");
-        ServletConfig sc = getServletConfig();
-        String u = sc.getInitParameter("User");
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-//        String p = sc.getInitParameter("Password");
-         String regex = "^(?=.*[0-9])(?=.*[a-z]).{2,20}$";
-         if(pass.matches(regex)){
-             request.getRequestDispatcher("WelcomeServlet").forward(request, response);
-         }else{
-             
-             response.sendRedirect("login.html");
-         }
-//        if(user.equals(u) && pass.equals(p)){
-//            request.getRequestDispatcher("WelcomeServlet").forward(request, response);
-//        }else{
-//            response.sendRedirect("login.html");
-//        }
+        processRequest(request, response);
     }
 
     /**
