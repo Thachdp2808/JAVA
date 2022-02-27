@@ -28,16 +28,15 @@ public class CategoryDAO {
             Connection conn = new DBConnect().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Category category = new Category(rs.getInt(1), rs.getString(2));
                 list.add(category);
             }
-            
+
         } catch (Exception ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
-    
-    
+
 }
