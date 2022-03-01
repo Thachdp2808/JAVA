@@ -4,24 +4,31 @@
  * and open the template in the editor.
  */
 package model;
+
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 /**
  *
  * @author Happy-2001
  */
 @Data
 @Builder
-@ToString
 @Getter
 @Setter
-public class Category {
-    public int id;
-    public String name;
-    
+@ToString
+public class Product {
+    private int id;
+    private String name;
+    private int quantity;
+    private double price;
+    private String description;
+    private String imageURL;
+    private String createdDate;
+    private int categoryid;
     
     
 }

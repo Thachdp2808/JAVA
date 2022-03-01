@@ -4,7 +4,7 @@
     Author     : Happy-2001
 --%>
 
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,8 +72,8 @@
                     <div class="col-md-3 my-2">
                         <h3>Category</h3>
                         <ul class="list-group">
-                            <c:forEach items="${listCategories}" var="C">
-                                <li class="list-group-item">${C.name}</li>
+                            <c:forEach items="${listCategories}" var="c">
+                                <li class="list-group-item">${c.name}</li>
                             </c:forEach>
                           </ul>
                     </div>

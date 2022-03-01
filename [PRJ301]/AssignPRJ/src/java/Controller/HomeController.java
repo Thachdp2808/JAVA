@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Category;
+import model.Product;
 
 /**
  *
@@ -33,6 +34,7 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        Product product = Product.builder() .build();
         List<Category> listCategories= new CategoryDAO().getallCat();
         request.setAttribute("listCategories", listCategories);
         request.getRequestDispatcher("index.jsp").forward(request, response);
