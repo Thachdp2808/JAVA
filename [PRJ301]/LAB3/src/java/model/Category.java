@@ -4,11 +4,13 @@
  * and open the template in the editor.
  */
 package model;
+
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 /**
  *
  * @author Happy-2001
@@ -46,6 +48,5 @@ public class Category {
     public String toString() {
         return "Category{" + "id=" + id + ", name=" + name + '}';
     }
-    
     
 }

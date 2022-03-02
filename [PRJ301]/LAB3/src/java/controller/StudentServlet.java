@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Student;
 import DAL.StudentDAO;
+import model.Category;
 
 
 public class StudentServlet extends HttpServlet {
@@ -34,6 +35,7 @@ public class StudentServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             StudentDAO u = new StudentDAO();
             List<Student> lst = u.getStudents();
+            
             request.setAttribute("lst", lst);
             request.getRequestDispatcher("../list.jsp").forward(request, response);
         }

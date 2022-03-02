@@ -14,27 +14,33 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Category;
+import model.Product;
 
 /**
  *
  * @author Happy-2001
  */
-public class CategoryDAO {
-    //Thao tác với bảng Category
-    public List<Category> getallCat() {
-        List<Category> list = new ArrayList<>();
+public class ProductDAO {
+
+    public List<Product> getallPro() {
+       List<Product> list = new ArrayList<>();
         try {
-            String sql = "select * from Category";
+            String sql = "select * from Product";
             Connection conn = new DBConnect().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 //                Category category = new Category(rs.getInt(1), rs.getString(2));
-//                Category category = Category.builder()
-//                        .id(rs.getInt(1))
-//                        .name(rs.getString(1)).build();  
-                   list.add(new Category(rs.getInt(1),rs.getString(2)));
-                
+                Product product = Product.builder()
+                        .id(rs.getInt(1))
+                        .name(rs.getString(1))
+                        .quantity(rs.getInt(3))
+                        .price(rs.getDouble(4))
+                        .description(rs.getString(5))
+                        .imageURL(rs.getString(6))
+                        .createdDate(rs.getString(7))
+                        .categoryid(rs.getInt(8)).build();
+                list.add(product);
             }
 
         } catch (Exception ex) {
@@ -42,12 +48,5 @@ public class CategoryDAO {
         }
         return list;
     }
-    public static void main(String[] args) {
-        CategoryDAO dao =new CategoryDAO();
-        List<Category> list =  dao.getallCat();
-        for(Category o : list){
-            System.out.println(o);
-        }
-    }
-
+    
 }

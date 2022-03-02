@@ -1,9 +1,8 @@
 <%-- 
-    Document   : index
-    Created on : Feb 25, 2022, 4:12:13 PM
+    Document   : hjome
+    Created on : Mar 2, 2022, 4:55:02 PM
     Author     : Happy-2001
 --%>
-
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -29,7 +28,7 @@
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body>
-        <%@include file="components/navBarComponent.jsp" %>
+        
         <!-- Header-->
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
@@ -132,6 +131,6 @@
                 </div>
             </div>
         </section>
-        <%@include file="components/footerComponent.jsp" %>
+        
     </body>
 </html>
