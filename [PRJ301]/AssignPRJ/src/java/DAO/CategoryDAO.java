@@ -33,10 +33,8 @@ public class CategoryDAO {
 //                Category category = Category.builder()
 //                        .id(rs.getInt(1))
 //                        .name(rs.getString(1)).build();  
-                   list.add(new Category(rs.getInt(1),rs.getString(2)));
-                
+                   list.add(new Category(rs.getInt(1),rs.getString(2))); 
             }
-
         } catch (Exception ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
