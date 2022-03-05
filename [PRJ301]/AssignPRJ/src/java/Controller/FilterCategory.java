@@ -21,7 +21,7 @@ import model.Product;
  *
  * @author Happy-2001
  */
-public class HomeController extends HttpServlet {
+public class FilterCategory extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,13 +35,16 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        CategoryDAO u = new CategoryDAO();
-        ProductDAO p = new ProductDAO();
-        List<Category> list = u.getallCat();
-        request.setAttribute("ListC", list);
-        List<Product> lst = p.getallPro();
-        request.setAttribute("ListP", lst);
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            int categoryid = Integer.parseInt(request.getParameter("id"));
+            ProductDAO dao = new ProductDAO();
+            CategoryDAO u = new CategoryDAO();
+            List<Product> listPro= dao.getProbyID(categoryid);
+            List<Category> list = u.getallCat();
+            request.setAttribute("ListC", list);
+            request.setAttribute("ListP", listPro);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
