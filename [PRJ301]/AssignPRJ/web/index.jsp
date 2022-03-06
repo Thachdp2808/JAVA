@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Small Business - Start Bootstrap Template</title>
+        <title>Shop của Xoài</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -23,9 +23,9 @@
     </head>
     <body>
         <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="position: fixed;max-width: 100%;top: 0;left: 0;right: 0;z-index: 1;">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">Start Bootstrap</a>
+                <a class="navbar-brand" href="home">Xoài Trang Trí</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -41,10 +41,10 @@
                             </ul>
                         </li>
                     </ul>
-                    <form class="d-flex mx-auto">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <form action="Search" class="d-flex mx-auto">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
                         <button class="btn btn-outline-success" type="submit">Search</button>
-                      </form>
+                    </form>
                     <form class="d-flex my-2">
                         <button class="btn btn-outline-light" type="submit">
                             <i class="bi-cart-fill me-1"></i>
@@ -59,7 +59,7 @@
         <!-- Page Content-->
         <div class="container px-4 px-lg-5">
             <!-- Heading Row-->
-            <div class="row gx-4 gx-lg-5 align-items-center my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center my-5" style="margin-top:7rem !important">
                 <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="https://dummyimage.com/900x400/dee2e6/6c757d.jpg" alt="..." /></div>
                 <div class="col-lg-5">
                     <h1 class="font-weight-light">Business Name or Tagline</h1>
@@ -75,12 +75,12 @@
             <div class="row gx-4 gx-lg-5">
                 <div class="col-md-3">
                     <h3>Category</h3>
-                        <ul class="list-group">
-                            <c:forEach items="${ListC}" var="c">
-                                <li class="list-group-item"><a href="filter-category?id=${c.id}">${c.name}</a></li>
-                            
-                            </c:forEach>
-                          </ul>
+                    <ul class="list-group">
+                        <c:forEach items="${ListC}" var="c">
+                            <li class="list-group-item"><a href="filter-category?id=${c.id}">${c.name}</a></li>
+
+                        </c:forEach>
+                    </ul>
                 </div>
                 <div class="col-md-9">
                     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3  justify-content-center">
@@ -91,7 +91,7 @@
                                     <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                                     <!-- Product image-->
                                     <img class="card-img-top" src="${P.imageURL}" alt="..." />
-                                    
+
                                     <!-- Product details-->
                                     <div class="card-body p-4">
                                         <div class="text-center">
@@ -117,7 +117,25 @@
                                 </div>
                             </div>
                         </c:forEach>
-                            
+
+                    </div>
+                </div>
+                <c:choose>
+                    <c:when test="${ListP==null || ListP.size()==0}">Not Found</c:when>
+                    <c:otherwise>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-end">
+                                <li class="page-item ${page==1?"disabled":""}"><a class="page-link" href="home?page=${page-1}" >Previous</a></li>
+                                    <c:forEach begin="1" end="${totalPage}" var="i">
+                                    <li class="page-item ${i == page?"active":""}"><a class="page-link" href="home?page=${i}">${i}</a></li>
+                                    </c:forEach>
+                                <li class="page-item ${page==totalPage?"disabled":""}"><a class="page-link "  href="home?page=${page+1}">Next</a></li>
+
+                            </ul>
+                        </nav>
+                    </c:otherwise>
+                </c:choose>
+            </div>
         </div>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
@@ -125,8 +143,9 @@
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
+
         <script src="js/scripts.js"></script>
+
     </body>
 </html>
 

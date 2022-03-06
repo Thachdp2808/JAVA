@@ -270,6 +270,14 @@ pre code {
   word-break: normal;
 }
 
+.fix{
+    position: fixed;
+    max-width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
 code {
   font-size: 0.875em;
   color: #d63384;
