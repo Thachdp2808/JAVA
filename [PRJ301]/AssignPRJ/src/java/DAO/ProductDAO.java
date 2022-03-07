@@ -117,6 +117,33 @@ public class ProductDAO {
         }
         return list;
     }
+    
+    public Product getOneProbyID(int ProductID) {
+        
+        try {
+            String sql = "select * from Product where id=?";
+            Connection conn = new DBConnect().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, ProductID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                 Product product = new Product(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8));
+                 return product;
+
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
         List<Product> list = dao.getallPro();
@@ -124,6 +151,8 @@ public class ProductDAO {
             System.out.println(o);
         }
     }
+
+    
 
     
 

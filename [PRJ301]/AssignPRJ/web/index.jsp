@@ -90,6 +90,7 @@
                                     <!-- Sale badge-->
                                     <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                                     <!-- Product image-->
+                                    <a href="item?Product=${P.id}">
                                     <img class="card-img-top" src="${P.imageURL}" alt="..." />
 
                                     <!-- Product details-->
@@ -97,14 +98,8 @@
                                         <div class="text-center">
                                             <!-- Product name-->
                                             <h5 class="fw-bolder">${P.name}</h5>
-                                            <!-- Product reviews-->
-                                            <div class="d-flex justify-content-center small text-warning mb-2">
-                                                <div class="bi-star-fill"></div>
-                                                <div class="bi-star-fill"></div>
-                                                <div class="bi-star-fill"></div>
-                                                <div class="bi-star-fill"></div>
-                                                <div class="bi-star-fill"></div>
-                                            </div>
+                                          
+                                            
                                             <!-- Product price-->
                                             <span class="text-muted text-decoration-line-through">$20.00</span>
                                             ${P.price}
