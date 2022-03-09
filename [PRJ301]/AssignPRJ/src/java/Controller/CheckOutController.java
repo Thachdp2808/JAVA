@@ -5,20 +5,22 @@
  */
 package Controller;
 
-import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Product;
+import javax.servlet.http.HttpSession;
+import model.Cart;
 
 /**
  *
  * @author Happy-2001
  */
-public class ItemServlet extends HttpServlet {
+public class CheckOutController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,13 +36,13 @@ public class ItemServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            int ProductID = Integer.parseInt(request.getParameter("Product"));
-            ProductDAO pro = new ProductDAO();
-            Product product = pro.getOneProbyID(ProductID);
-            request.setAttribute("product", product);
-            request.getSession().setAttribute("URLHistory", "item?Product="+product.getId());
-            request.getRequestDispatcher("item.jsp").forward(request, response);
-            
+            HttpSession session = request.getSession();
+            Map<Integer, Cart> carts = (Map<Integer,Cart>) session.getAttribute("carts");
+            if(carts==null){
+                carts = new LinkedHashMap<>();
+            }
+            request.setAttribute("carts", carts);
+            request.getRequestDispatcher("checkout.jsp").forward(request, response);
         }
     }
 

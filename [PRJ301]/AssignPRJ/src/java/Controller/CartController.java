@@ -38,6 +38,7 @@ public class CartController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             int ProductID = Integer.parseInt(request.getParameter("ProductID"));
+            Cart cart = new Cart();
             
             HttpSession session = request.getSession();
             Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
@@ -52,9 +53,8 @@ public class CartController extends HttpServlet {
                 Product product = new ProductDAO().getOneProbyID(ProductID);
                 carts.put(ProductID, Cart.builder().product(product).quantity(1).build());
             }
-            session.setAttribute("carts", carts);
-            System.out.println(carts);
-            response.sendRedirect("item?Product="+ProductID);
+            session.setAttribute("carts", carts);         
+            response.sendRedirect((String)session.getAttribute("URLHistory"));
         }
     }
 

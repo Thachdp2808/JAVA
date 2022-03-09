@@ -1,12 +1,9 @@
 <%-- 
-    Document   : index
-    Created on : Feb 25, 2022, 4:12:13 PM
+    Document   : checkout
+    Created on : Mar 9, 2022, 4:06:07 PM
     Author     : Happy-2001
 --%>
 
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,8 +19,7 @@
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="position: fixed;max-width: 100%;top: 0;left: 0;right: 0;z-index: 1;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="position: fixed;max-width: 100%;top: 0;left: 0;right: 0;z-index: 1;">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="home">Mr.Tuan</br>Decor Nội Thất</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -56,82 +52,39 @@
                 </div>
             </div>
         </nav>
-        <!-- Page Content-->
-        <div class="container px-4 px-lg-5">
-            <!-- Heading Row-->
-            <div class="row gx-4 gx-lg-5 align-items-center my-5" style="margin-top:7rem !important">
-                <div class="col-lg-7"><img class="img-fluid rounded mb-4 mb-lg-0" src="https://dummyimage.com/900x400/dee2e6/6c757d.jpg" alt="..." /></div>
-                <div class="col-lg-5">
-                    <h1 class="font-weight-light">Business Name or Tagline</h1>
-                    <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
-                    <a class="btn btn-primary" href="#!">Call to Action!</a>
-                </div>
+        <section class="py-5 px-4 px-lg-5 " style="padding-top:7rem !important">
+            <div class="container" style="min-height: 500px">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col">Handle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td colspan="2">Larry the Bird</td>
+                            <td>@twitter</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <!-- Call to Action-->
-            <div class="card text-white bg-secondary my-5 py-4 text-center">
-                <div class="card-body"><p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p></div>
-            </div>
-            <!-- Content Row-->
-            <div class="row gx-4 gx-lg-5">
-                <div class="col-md-3">
-                    <h3>Category</h3>
-                    <ul class="list-group">
-                        <c:forEach items="${ListC}" var="c">
-                            <li class="list-group-item"><a href="filter-category?id=${c.id}">${c.name}</a></li>
-                            </c:forEach>
-                    </ul>
-                </div>
-                <div class="col-md-9">
-                    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3  justify-content-center">
-                        <c:forEach items="${ListP}" var="P">
-                            <div class="col mb-5">
-                                <div class="card h-100">
-                                    <!-- Sale badge-->
-                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                                    <!-- Product image-->
-                                    <a href="item?Product=${P.id}">
-                                        <img class="card-img-top" src="${P.imageURL}" alt="..." />
-
-                                        <!-- Product details-->
-                                        <div class="card-body p-4">
-                                            <div class="text-center">
-                                                <!-- Product name-->
-                                                <h5 class="fw-bolder">${P.name}</h5>
-
-
-                                                <!-- Product price-->
-                                                <span class="text-muted text-decoration-line-through">$20.00</span>
-                                                ${P.price}
-                                            </div>
-                                        </div>
-                                        <!-- Product actions-->
-                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="Cart?ProductID=${P.id}">Add to cart</a></div>
-                                        </div>
-                                </div>
-                            </div>
-                        </c:forEach>
-
-                    </div>
-                </div>
-                <c:choose>
-                    <c:when test="${ListP==null || ListP.size()==0}">Not Found</c:when>
-                    <c:otherwise>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-end">
-                                <li class="page-item ${page==1?"disabled":""}"><a class="page-link" href="home?page=${page-1}" >Previous</a></li>
-                                    <c:forEach begin="1" end="${totalPage}" var="i">
-                                    <li class="page-item ${i == page?"active":""}"><a class="page-link" href="home?page=${i}">${i}</a></li>
-                                    </c:forEach>
-                                <li class="page-item ${page==totalPage?"disabled":""}"><a class="page-link "  href="home?page=${page+1}">Next</a></li>
-
-                            </ul>
-                        </nav>
-                    </c:otherwise>
-                </c:choose>
-            </div>
-        </div>
-        <!-- Footer-->
+        </section>
         <footer class="py-5 bg-light">
             <div class="container">
                 <div class="row">

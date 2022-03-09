@@ -57,6 +57,7 @@ public class HomeController extends HttpServlet {
             page=Integer.parseInt(pag);
         }
         request.setAttribute("page", page);
+        request.getSession().setAttribute("URLHistory", "home");
         request.setAttribute("ListP", lst.subList((page-1)*page_size,page*page_size));
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
