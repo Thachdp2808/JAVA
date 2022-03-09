@@ -49,7 +49,7 @@
                         <button class="btn btn-outline-light" type="submit">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">${carts.size}</span>
                         </button>
                     </form>
                     <button class="btn btn-outline-primary ms-lg-2">Login</button>
@@ -72,7 +72,7 @@
                         <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
                         <div class="d-flex">
                             <input class="form-control text-center me-3" id="inputQuantity" type="num" value="${product.quantity}" style="max-width: 3rem" />
-                            <a class="btn btn-outline-dark flex-shrink-0" href="AddToCart?ProductID=${product.id}">
+                            <a class="btn btn-outline-dark flex-shrink-0" href="Cart?ProductID=${product.id}">
                                 <i class="bi-cart-fill me-1"></i>
                                 Add to cart
                             </a>

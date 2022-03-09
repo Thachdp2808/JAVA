@@ -15,7 +15,9 @@ import lombok.ToString;
  *
  * @author Happy-2001
  */
-
+@Builder
+@Getter
+@Setter
 public class Product {
     private int id;
     private String name;

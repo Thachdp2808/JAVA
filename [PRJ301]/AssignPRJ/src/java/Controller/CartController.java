@@ -5,18 +5,24 @@
  */
 package Controller;
 
+import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Cart;
+import model.Product;
 
 /**
  *
  * @author Happy-2001
  */
-public class AddToCartController extends HttpServlet {
+public class CartController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,6 +39,22 @@ public class AddToCartController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             int ProductID = Integer.parseInt(request.getParameter("ProductID"));
             
+            HttpSession session = request.getSession();
+            Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
+            if (carts == null) {
+                carts = new LinkedHashMap<>();
+            }
+
+            if (carts.containsKey(ProductID)) {//sản phẩm đã có trên giỏ hàng
+                int oldQuantity = carts.get(ProductID).getQuantity();
+                carts.get(ProductID).setQuantity(oldQuantity + 1);
+            } else {//sản phẩm chưa có trên giỏ hàng
+                Product product = new ProductDAO().getOneProbyID(ProductID);
+                carts.put(ProductID, Cart.builder().product(product).quantity(1).build());
+            }
+            session.setAttribute("carts", carts);
+            System.out.println(carts);
+            response.sendRedirect("item?Product="+ProductID);
         }
     }
 
