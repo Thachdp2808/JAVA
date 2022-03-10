@@ -20,7 +20,7 @@
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="position: fixed;max-width: 100%;top: 0;left: 0;right: 0;z-index: 1;">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="position: fixed;max-width: 100%;top: 0;left: 0;right: 0;z-index: 1;">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="home">Mr.Tuan</br>Decor Nội Thất</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -56,32 +56,45 @@
         <section class="py-5 px-4 px-lg-5 " style="padding-top:7rem !important">
             <div class="container" style="min-height: 500px">
                 <table class="table  table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Sản Phẩm</th>
-                            <th scope="col">Image</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">ToTal Price</th>
-                            <th scope="col">Action</th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${carts}" var="C">
-                        <tr> 
-                            <td>1</td>
-                            <td><img src="${C.value.product.imageURL}" width="50"></td>
-                            <td>${C.value.product.name}</td>
-                            <td>${C.value.product.price}</td>
-                            <td>${C.value.quantity}</td>
-                            <td>${C.value.product.price*C.value.quantity}</td>
-                            <td><i class="bi bi-trash"></i><a class="btn btn-outline-danger" href="#"><i class="bi bi-trash"></i>Delete</a></td>
-                        </tr>
+                    <c:if test="${sessionScope.carts.size()==0}">
+                        <h1>List is Empty</h1>
+                    </c:if>
+                    <c:if test="${sessionScope.carts.size()!=0}">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sản Phẩm</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">ToTal Price</th>
+                                <th scope="col">Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${carts}" var="C">
+                            <form action="UpdateCheckout">
+                                <tr> 
+                                <input type="hidden" name="productid" value="${C.value.product.id}">
+                                    <td>1</td>
+                                    <td><img src="${C.value.product.imageURL}" width="50"></td>
+                                    <td>${C.value.product.name}</td>
+                                    <td>${C.value.product.price}</td>
+                                    <td><input onchange="this.form.submit()" type="number" value="${C.value.quantity}" name="quantity"></td>
+                                    <td>${C.value.product.price*C.value.quantity}</td>
+                                    <td><a class="btn btn-outline-danger" href="DeleteCart?productid=${C.value.product.id}"><i class="bi bi-trash"></i>Delete</a></td>
+                                </tr>
+                            </form>
+
                         </c:forEach>
-                    </tbody>
+
+                        </tbody>
+
+                    </c:if>
                 </table>
+                <h3>TotalMoney: $${Total}</h3>
+                <a class="btn btn-success" href="payment">Payment</a>
             </div>
         </section>
         <footer class="py-5 bg-light">
