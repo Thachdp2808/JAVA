@@ -4,6 +4,7 @@
     Author     : Happy-2001
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,33 +55,31 @@
         </nav>
         <section class="py-5 px-4 px-lg-5 " style="padding-top:7rem !important">
             <div class="container" style="min-height: 500px">
-                <table class="table table-striped table-hover">
+                <table class="table  table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col">Sản Phẩm</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">ToTal Price</th>
+                            <th scope="col">Action</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                        <c:forEach items="${carts}" var="C">
+                        <tr> 
+                            <td>1</td>
+                            <td><img src="${C.value.product.imageURL}" width="50"></td>
+                            <td>${C.value.product.name}</td>
+                            <td>${C.value.product.price}</td>
+                            <td>${C.value.quantity}</td>
+                            <td>${C.value.product.price*C.value.quantity}</td>
+                            <td><i class="bi bi-trash"></i><a class="btn btn-outline-danger" href="#"><i class="bi bi-trash"></i>Delete</a></td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
             </div>
