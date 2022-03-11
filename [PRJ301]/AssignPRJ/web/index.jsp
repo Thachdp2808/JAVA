@@ -75,6 +75,7 @@
             <div class="row gx-4 gx-lg-5">
                 <div class="col-md-3">
                     <h3>Category</h3>
+                    <h1>${product.price}abc</h1>
                     <ul class="list-group">
                         <c:forEach items="${ListC}" var="c">
                             <li class="list-group-item"><a href="filter-category?id=${c.id}">${c.name}</a></li>
@@ -185,4 +186,3 @@
 
     </body>
 </html>
-

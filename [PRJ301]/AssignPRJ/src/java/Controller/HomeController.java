@@ -43,13 +43,15 @@ public class HomeController extends HttpServlet {
         request.setAttribute("ListP", lst);
         int page = 1;
         int page_size=6;
-        
+        Product product = p.getOneProbyID(1);
+        request.setAttribute("product", product);
         //totalpage
         int totalProducts = p.getallProbyID();
         int totalPage = totalProducts/page_size;
         if(totalProducts % totalPage !=0){
             totalPage +=1;
         }
+        request.setAttribute("totalproduct", totalProducts);
         request.setAttribute("totalPage", totalPage);
         //Setpage
         String pag = request.getParameter("page");
