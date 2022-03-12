@@ -5,12 +5,23 @@
  */
 package Controller;
 
+import DAO.OrderDAO;
+import DAO.OrderDetailDAO;
+import DAO.ProductDAO;
+import DAO.ShippingDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Cart;
+import model.Order;
+import model.Product;
+import model.Shipping;
 
 /**
  *
@@ -30,17 +41,24 @@ public class PaymentController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet PaymentController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet PaymentController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            HttpSession session = request.getSession();
+            Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
+            if (carts == null) {
+                carts = new LinkedHashMap<>();
+            }
+            //tinh tong tien
+            double totalMoney = 0;
+            for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
+                Integer productId = entry.getKey();
+                Cart cart = entry.getValue();
+                totalMoney += cart.getQuantity() * cart.getProduct().getPrice();
+            }
+            request.setAttribute("Total", totalMoney);
+
+            request.getRequestDispatcher("payment.jsp").forward(request, response);
         }
     }
 
@@ -70,7 +88,38 @@ public class PaymentController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String name = request.getParameter("name");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        String email = request.getParameter("email");
+        String note = request.getParameter("note");
+        ShippingDAO shipdao = new ShippingDAO();
+        OrderDAO orderdao = new OrderDAO();
+        OrderDetailDAO detaildao = new OrderDetailDAO();
+        HttpSession session = request.getSession();
+        Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
+        if (carts == null) {
+            carts = new LinkedHashMap<>();
+        }
+        //tinh tong tien
+        double totalMoney = 0;
+        for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
+            Integer productId = entry.getKey();
+            Cart cart = entry.getValue();
+            totalMoney += cart.getQuantity() * cart.getProduct().getPrice();
+        }
+        //Lưu vào database
+
+        //Lưu vào Shipping
+        Shipping shipping = new Shipping(name, phone, address, email);
+        int shippingid = shipdao.returnid(shipping);// trả về id tự tăng của bản ghi vừa lưu vào database
+        //Lưu vào Order
+        Order order = new Order(1,totalMoney,note,shippingid);
+        int orderId = orderdao.returnid(order);
+        //Lưu vào OrderDetail
+        detaildao.saveCart(orderId,carts);
+        session.removeAttribute("carts");
+        response.sendRedirect("thank");
     }
 
     /**
