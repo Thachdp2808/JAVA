@@ -52,7 +52,7 @@
                             <span class="badge bg-dark text-white ms-1 rounded-pill">${carts.size()}</span>
                         </a>
                     </form>
-                    <button class="btn btn-outline-primary ms-lg-2">Login</button>
+                        <a class="btn btn-outline-primary ms-lg-2" href="login">Login</a>
                 </div>
             </div>
         </nav>
