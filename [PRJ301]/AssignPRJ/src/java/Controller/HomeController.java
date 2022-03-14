@@ -35,32 +35,35 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        CategoryDAO u = new CategoryDAO();
-        ProductDAO p = new ProductDAO();
-        List<Category> list = u.getallCat();
-        request.setAttribute("ListC", list);
-        List<Product> lst = p.getallPro();
-        request.setAttribute("ListP", lst);
-        int page = 1;
-        int page_size=6;
-        Product product = p.getOneProbyID(1);
-        request.setAttribute("product", product);
-        //totalpage
-        int totalProducts = p.getallProbyID();
-        int totalPage = totalProducts/page_size;
-        if(totalProducts % totalPage !=0){
-            totalPage +=1;
-        }
-        request.setAttribute("totalproduct", totalProducts);
-        request.setAttribute("totalPage", totalPage);
-        //Setpage
-        String pag = request.getParameter("page");
-        if(pag!=null){
-            page=Integer.parseInt(pag);
-        }
-        request.setAttribute("page", page);
-        request.getSession().setAttribute("URLHistory", "home");
-        request.setAttribute("ListP", lst.subList((page-1)*page_size,page*page_size));
+//        CategoryDAO u = new CategoryDAO();
+//        ProductDAO p = new ProductDAO();
+//        List<Category> list = u.getallCat();
+//        request.setAttribute("ListC", list);
+//        List<Product> lst = p.getallPro();
+//        request.setAttribute("ListP", lst);
+//        int page = 1;
+//        int page_size = 24;
+//        Product product = p.getOneProbyID(1);
+//        request.setAttribute("product", product);
+//        //totalpage
+//        int totalProducts = p.getallProbyID();
+//        int totalPage = totalProducts/page_size;
+//        if(totalProducts % totalPage !=0){
+//            totalPage +=1;
+//        }
+//        request.setAttribute("totalproduct", totalProducts);
+//        request.setAttribute("totalPage", totalPage);
+//        //Setpage
+//        String pag = request.getParameter("page");
+//        if(pag!=null){
+//            page=Integer.parseInt(pag);
+//        }
+//        request.setAttribute("page", page);
+//        request.getSession().setAttribute("URLHistory", "home");
+//        request.setAttribute("ListP", lst.subList((page-1)*page_size,page*page_size));
+        ProductDAO dao = new ProductDAO();
+        List<Product> listPro = dao.getProbyCategoryid(6, 7);
+        request.setAttribute("ListP", listPro);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 

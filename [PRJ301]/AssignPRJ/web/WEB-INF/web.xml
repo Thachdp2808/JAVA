@@ -56,6 +56,10 @@
         <servlet-name>ProductController</servlet-name>
         <servlet-class>Controller.ProductController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FilterNewArrivals</servlet-name>
+        <servlet-class>Controller.FilterNewArrivals</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -111,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>ProductController</servlet-name>
         <url-pattern>/productcontrol</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FilterNewArrivals</servlet-name>
+        <url-pattern>/filter-newarr</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

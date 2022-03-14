@@ -68,16 +68,16 @@
                                 <nav class="navbar">
                                     <ul class="navbar_menu">
                                         <li><a href="home">home</a></li>
-                                        <li><a href="product.jsp">Product</a></li>
+                                        <li><a href="productcontrol">Product</a></li>
                                         <li><a href="contact.html">contact</a></li>
                                     </ul>
                                     <ul class="navbar_user">
                                         <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+                                        <li><a href="login"><i class="fa fa-user" aria-hidden="true"></i></a></li>
                                         <li class="checkout">
-                                            <a href="#">
+                                            <a href="Checkout">
                                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                                <span id="checkout_items" class="checkout_items">2</span>
+                                                <span id="checkout_items" class="checkout_items">${carts.size()}</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -99,8 +99,8 @@
 
                         <div class="breadcrumbs d-flex flex-row align-items-center">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li class="active"><a href="index.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
+                                <li><a href="home">Home</a></li>
+                                <li class="active"><a href="home"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
                             </ul>
                         </div>
 
@@ -154,16 +154,21 @@
                                                 </li>
                                             </ul>
                                             <div class="pages d-flex flex-row align-items-center">
-                                                <div class="page_current">
-                                                    <span>1</span>
-                                                    <ul class="page_selection">
-                                                        <li><a href="#">1</a></li>
-                                                        <li><a href="#">2</a></li>
-                                                        <li><a href="#">3</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="page_total"><span>of</span> 3</div>
-                                                <div id="next_page" class="page_next"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                                <c:choose>
+                                                    <c:when test="${ListP==null || ListP.size()==0}">Not Found</c:when>
+                                                    <c:otherwise>
+                                                        <nav aria-label="Page navigation example">
+                                                            <ul class="pagination justify-content-end">
+                                                                <li class="page-item ${page==1?"disabled":""}"><a class="page-link" href="productcontrol?page=${page-1}" >Previous</a></li>
+                                                                    <c:forEach begin="1" end="${totalPage}" var="i">
+                                                                    <li class="page-item ${i == page?"active":""}"><a class="page-link" href="productcontrol?page=${i}">${i}</a></li>
+                                                                    </c:forEach>
+                                                                <li class="page-item ${page==totalPage?"disabled":""}"><a class="page-link "  href="productcontrol?page=${page+1}">Next</a></li>
+
+                                                            </ul>
+                                                        </nav>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </div>
 
                                         </div>
@@ -174,22 +179,22 @@
 
                                             <!-- Product 3 -->
                                             <c:forEach items="${ListP}" var="P">
-                                            <div class="product-item women">
-                                                <div class="product product_filter">
-                                                    <div class="product_image">
-                                                        <img src="${P.imageURL}" alt="">
+                                                <div class="product-item women">
+                                                    <div class="product product_filter">
+                                                        <div class="product_image">
+                                                            <img src="${P.imageURL}" alt="">
+                                                        </div>
+                                                        <div class="favorite"></div>
+                                                        <div class="product_info">
+                                                            <h6 class="product_name"><a href="item">${P.name}</a></h6>
+                                                            <div class="product_price">${P.price} $</div>
+                                                        </div>
                                                     </div>
-                                                    <div class="favorite"></div>
-                                                    <div class="product_info">
-                                                        <h6 class="product_name"><a href="item">${P.name}</a></h6>
-                                                        <div class="product_price">${P.price}</div>
-                                                    </div>
+                                                    <div class="red_button add_to_cart_button"><a href="Cart?ProductID=${P.id}">add to cart</a></div>
                                                 </div>
-                                                <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-                                            </div>
                                             </c:forEach>
-                                        <!-- Product Sorting -->
-
+                                            <!-- Product Sorting -->
+                                        </div>
                                         <div class="product_sorting_container product_sorting_container_bottom clearfix">
                                             <ul class="product_sorting">
                                                 <li>
@@ -206,16 +211,21 @@
                                             </ul>
                                             <span class="showing_results">Showing 1–3 of 12 results</span>
                                             <div class="pages d-flex flex-row align-items-center">
-                                                <div class="page_current">
-                                                    <span>1</span>
-                                                    <ul class="page_selection">
-                                                        <li><a href="#">1</a></li>
-                                                        <li><a href="#">2</a></li>
-                                                        <li><a href="#">3</a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="page_total"><span>of</span> 3</div>
-                                                <div id="next_page_1" class="page_next"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                                <c:choose>
+                                                    <c:when test="${ListP==null || ListP.size()==0}">Not Found</c:when>
+                                                    <c:otherwise>
+                                                        <nav aria-label="Page navigation example">
+                                                            <ul class="pagination justify-content-end">
+                                                                <li class="page-item ${page==1?"disabled":""}"><a class="page-link" href="productcontrol?page=${page-1}" >Previous</a></li>
+                                                                    <c:forEach begin="1" end="${totalPage}" var="i">
+                                                                    <li class="page-item ${i == page?"active":""}"><a class="page-link" href="productcontrol?page=${i}">${i}</a></li>
+                                                                    </c:forEach>
+                                                                <li class="page-item ${page==totalPage?"disabled":""}"><a class="page-link "  href="productcontrol?page=${page+1}">Next</a></li>
+
+                                                            </ul>
+                                                        </nav>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </div>
 
                                         </div>
@@ -296,38 +306,38 @@
 
             <!-- Footer -->
 
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
-						<ul class="footer_nav">
-							<li><a href="#">Blog</a></li>
-							<li><a href="#">FAQs</a></li>
-							<li><a href="contact.html">Contact us</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
-						<ul>
-							<li><a href="https://www.facebook.com/profile.php?id=100014453103092"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-							<li><a href="https://github.com/Happy-2001"><i class="fa fa-github" aria-hidden="true"></i></a></li>
-							<li><a href="https://www.instagram.com/th.buta/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-							<li><a href="https://www.pinterest.com/Dinos0801/"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="footer_nav_container">
-						<div class="cr">©2018 All Rights Reserverd. Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#">Colorlib</a> &amp; distributed by <a href="https://themewagon.com">ThemeWagon</a></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
+            <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
+                                <ul class="footer_nav">
+                                    <li><a href="#">Blog</a></li>
+                                    <li><a href="#">FAQs</a></li>
+                                    <li><a href="contact.html">Contact us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="footer_social d-flex flex-row align-items-center justify-content-lg-end justify-content-center">
+                                <ul>
+                                    <li><a href="https://www.facebook.com/profile.php?id=100014453103092" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://github.com/Happy-2001" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.instagram.com/th.buta/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.pinterest.com/Dinos0801/" target="_blank"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="footer_nav_container">
+                                <div class="cr">©2020 All Rights Reserverd. Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://github.com/Happy-2001">Đào Phúc Thạch</a> &amp; distributed by <a href="home">ColoShop</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
 
         </div>
 

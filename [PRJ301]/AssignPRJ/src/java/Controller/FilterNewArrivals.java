@@ -5,7 +5,6 @@
  */
 package Controller;
 
-import DAO.CategoryDAO;
 import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,14 +13,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Category;
 import model.Product;
 
 /**
  *
  * @author Happy-2001
  */
-public class ProductController extends HttpServlet {
+public class FilterNewArrivals extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,33 +34,22 @@ public class ProductController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            CategoryDAO u = new CategoryDAO();
-        ProductDAO p = new ProductDAO();
-           List<Category> list = u.getallCat();
-        request.setAttribute("ListC", list);
-        List<Product> lst = p.getallPro();
-        request.setAttribute("ListP", lst);
-        Product product = p.getOneProbyID(1);
-        request.setAttribute("product", product);
-        int page = 1;
-        int page_size=24;
-        //totalpage
-        int totalProducts = p.getallProbyID();
-        int totalPage = totalProducts/page_size;
-        if(totalProducts % totalPage !=0){
-            totalPage +=1;
-        }
-        request.setAttribute("totalproduct", totalProducts);
-        request.setAttribute("totalPage", totalPage);
-        //Setpage
-        String pag = request.getParameter("page");
-        if(pag!=null){
-            page=Integer.parseInt(pag);
-        }
-        request.setAttribute("page", page);
-        request.getSession().setAttribute("URLHistory", "productcontrol");
-        request.setAttribute("ListP", lst.subList((page-1)*page_size,page*page_size));
-        request.getRequestDispatcher("product.jsp").forward(request, response);
+            /* TODO output your page here. You may use following sample code. */
+           String name = request.getParameter("name");
+           ProductDAO dao = new ProductDAO();
+           if(name.equalsIgnoreCase("livingroom") || name.isEmpty()){
+               List<Product> listPro= dao.getProbyCategoryid(6,7);
+               request.setAttribute("ListP", listPro);
+           }
+           if(name.equalsIgnoreCase("bedroom")){
+               List<Product> listPro= dao.getProbyCategoryid(1,2);
+               request.setAttribute("ListP", listPro);
+           }
+           if(name.equalsIgnoreCase("office")){
+               List<Product> listPro= dao.getProbyCategoryid(10,8);
+               request.setAttribute("ListP", listPro);
+           }
+           request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 
