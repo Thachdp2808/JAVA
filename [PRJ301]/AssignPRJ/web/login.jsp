@@ -4,6 +4,7 @@
     Author     : Happy-2001
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +48,7 @@
 
 				<form class="login100-form validate-form" action="login" method="POST">
 					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
-						<span class="label-input100">Username</span>
+						<span class="label-input100">Username${accountId}</span>
                                                 <input class="input100" type="text" name="username" placeholder="Enter username" value="${username}">
 						<span class="focus-input100"></span>
 					</div>

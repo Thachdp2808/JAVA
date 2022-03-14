@@ -97,6 +97,9 @@ public class PaymentController extends HttpServlet {
         OrderDAO orderdao = new OrderDAO();
         OrderDetailDAO detaildao = new OrderDetailDAO();
         HttpSession session = request.getSession();
+
+        Integer id = (Integer) session.getAttribute("accountid");
+        int idr = Integer.parseInt((String) session.getAttribute("accountid"));
         Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
         if (carts == null) {
             carts = new LinkedHashMap<>();
@@ -114,7 +117,7 @@ public class PaymentController extends HttpServlet {
         Shipping shipping = new Shipping(name, phone, address, email);
         int shippingid = shipdao.returnid(shipping);// trả về id tự tăng của bản ghi vừa lưu vào database
         //Lưu vào Order
-        Order order = new Order(1,totalMoney,note,shippingid);
+        Order order = new Order(id,totalMoney,note,shippingid);
         int orderId = orderdao.returnid(order);
         //Lưu vào OrderDetail
         detaildao.saveCart(orderId,carts);

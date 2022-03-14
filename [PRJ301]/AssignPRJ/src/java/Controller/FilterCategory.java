@@ -43,7 +43,7 @@ public class FilterCategory extends HttpServlet {
             List<Category> list = u.getallCat();
             request.setAttribute("ListC", list);
             request.setAttribute("ListP", listPro);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("product.jsp").forward(request, response);
         }
     }
 

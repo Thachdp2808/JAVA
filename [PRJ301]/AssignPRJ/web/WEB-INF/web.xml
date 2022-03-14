@@ -52,6 +52,10 @@
         <servlet-name>CreateAccountController</servlet-name>
         <servlet-class>Controller.CreateAccountController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductController</servlet-name>
+        <servlet-class>Controller.ProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>CreateAccountController</servlet-name>
         <url-pattern>/createAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductController</servlet-name>
+        <url-pattern>/productcontrol</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
