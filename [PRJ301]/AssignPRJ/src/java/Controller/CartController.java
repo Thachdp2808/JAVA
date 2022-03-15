@@ -51,7 +51,7 @@ public class CartController extends HttpServlet {
                 carts.get(ProductID).setQuantity(oldQuantity + 1);
             } else {//sản phẩm chưa có trên giỏ hàng
                 Product product = new ProductDAO().getOneProbyID(ProductID);
-                carts.put(ProductID, Cart.builder().product(product).quantity(1).build());
+                carts.put(ProductID,Cart.builder().product(product).quantity(1).build());
             }
             session.setAttribute("carts", carts);         
             response.sendRedirect((String)session.getAttribute("URLHistory"));

@@ -102,11 +102,12 @@
                         </c:forEach>
 
                         </tbody>
-
+                    
                     </c:if>
                 </table>
                 <h3>TotalMoney: $${Total}</h3>
                 <a class="btn btn-success" href="payment" style="border-color: #fe4c50;background-color: #fe4c50">Payment</a>
+                
             </div>
         </section>
        <!-- Footer -->

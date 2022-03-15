@@ -100,7 +100,7 @@
                         <div class="breadcrumbs d-flex flex-row align-items-center">
                             <ul>
                                 <li><a href="home">Home</a></li>
-                                <li class="active"><a href="home"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
+                                <li class="active"><a href="productcontrol"><i class="fa fa-angle-right" aria-hidden="true"></i>Product</a></li>
                             </ul>
                         </div>
 
