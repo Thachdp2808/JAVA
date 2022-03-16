@@ -94,34 +94,51 @@ public class PaymentController extends HttpServlet {
         String email = request.getParameter("email");
         String note = request.getParameter("note");
         OrderDAO orderdao = new OrderDAO();
+        ProductDAO p = new ProductDAO();
         OrderDetailDAO detaildao = new OrderDetailDAO();
         HttpSession session = request.getSession();
-        
-        Object objacc=session.getAttribute("account");
-        if(objacc!=null){
-            Account acc = (Account) objacc;
-        
-        Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
-        if (carts == null) {
-            carts = new LinkedHashMap<>();
-        }
-        //tinh tong tien
-        double totalMoney = 0;
-        for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
-            Integer productId = entry.getKey();
-            Cart cart = entry.getValue();
-            totalMoney += cart.getQuantity() * cart.getProduct().getPrice();
-        }
-        //Lưu vào database
 
-        //Lưu vào Order
-        Order order = new Order(acc.getId(),totalMoney,note);
-        int orderId = orderdao.returnid(order);
-        System.out.println();
-        //Lưu vào OrderDetail
-        detaildao.saveCart(orderId,carts);
-        session.removeAttribute("carts");
-        response.sendRedirect("thank");
+        Object objacc = session.getAttribute("account");
+        if (objacc != null) {
+            Account acc = (Account) objacc;
+
+            Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
+            if (carts == null) {
+                carts = new LinkedHashMap<>();
+            }
+            //tinh tong tien
+            double totalMoney = 0;
+            for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
+                Integer productId = entry.getKey();
+                Cart cart = entry.getValue();
+                totalMoney += cart.getQuantity() * cart.getProduct().getPrice();
+            }
+            //Lưu vào database
+
+            //Lưu vào Order
+            Order order = new Order(acc.getId(), totalMoney, note);
+            int orderId = orderdao.returnid(order);
+            System.out.println();
+            //Lưu vào OrderDetail
+
+            int id = 0, oldquantity = 0;
+
+            for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
+                Integer productId = entry.getKey();
+                Cart cart = entry.getValue();
+                oldquantity = cart.getQuantity();
+                id = cart.getProduct().getId();
+            }
+            Product product = p.getOneProbyID(id);
+            int quantityOfproduct = product.getQuantity();
+            if (quantityOfproduct > 0 && oldquantity < quantityOfproduct) {
+                product.setQuantity(quantityOfproduct - oldquantity);
+                detaildao.saveCart(orderId, carts);
+                p.update(product,id);
+                session.removeAttribute("carts");
+                response.sendRedirect("thank");
+            }
+
         }
     }
 

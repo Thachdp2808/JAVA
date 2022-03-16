@@ -9,6 +9,7 @@ import Context.DBConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -72,9 +73,33 @@ public class ProductDAO {
         }
         return list;
     }
-    
+    public ArrayList<Product> pageProduct(int pageIndex) {
+        ArrayList<Product> lp = new ArrayList<>();
+        try {
+            
+            String sql = "SELECT top 4 * \n"
+                    + "FROM Product\n"
+                    + "where id > ?\n"
+                    + "ORDER BY id";
+            Connection conn = new DBConnect().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, (pageIndex-1)*4);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Product p = new Product();
+                p.setId(rs.getInt(1));
+                p.setName(rs.getString(2));
+                lp.add(p);
+            }
+            
+            
+        } catch (Exception ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lp;
+    }
     public int getallProbyID() {
-        
+
         try {
             String sql = "select COUNT(*)  from Product";
             Connection conn = new DBConnect().getConnection();
@@ -82,7 +107,6 @@ public class ProductDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 return rs.getInt(1);
-                        
 
             }
 
@@ -91,14 +115,14 @@ public class ProductDAO {
         }
         return 0;
     }
-    
+
     public List<Product> search(String keyword) {
         List<Product> list = new ArrayList<>();
         try {
             String sql = "select * from Product where name like ?";
             Connection conn = new DBConnect().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, "%"+keyword+"%");
+            ps.setString(1, "%" + keyword + "%");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Product(rs.getInt(1),
@@ -117,9 +141,9 @@ public class ProductDAO {
         }
         return list;
     }
-    
+
     public Product getOneProbyID(int ProductID) {
-        
+
         try {
             String sql = "select * from Product where id=?";
             Connection conn = new DBConnect().getConnection();
@@ -127,7 +151,7 @@ public class ProductDAO {
             ps.setInt(1, ProductID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                 Product product = new Product(rs.getInt(1),
+                Product product = new Product(rs.getInt(1),
                         rs.getString(2),
                         rs.getInt(3),
                         rs.getDouble(4),
@@ -135,7 +159,7 @@ public class ProductDAO {
                         rs.getString(6),
                         rs.getString(7),
                         rs.getInt(8));
-                 return product;
+                return product;
 
             }
 
@@ -144,7 +168,7 @@ public class ProductDAO {
         }
         return null;
     }
-    
+
     public List<Product> getProbyCategoryid(int i, int i0) {
         List<Product> list = new ArrayList<>();
         try {
@@ -171,6 +195,37 @@ public class ProductDAO {
         return list;
     }
 
+    public boolean update(Product product, int id) {
+        int check =0;
+        try {
+            String sql = "UPDATE [Shopping].[dbo].[Product]\n"
+                    + "   SET [name] = ?\n"
+                    + "      ,[quantity] = ?\n"
+                    + "      ,[price] = ?\n"
+                    + "      ,[description] = ?\n"
+                    + "      ,[imageUrl] = ?\n"
+                    + "      ,[create_date] = ?\n"
+                    + "      ,[Categoryid] = ?\n"
+                    + " WHERE id=?";
+            Connection conn = new DBConnect().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            
+            ps.setString(1, product.getName());
+            ps.setInt(2,product.getQuantity());
+            ps.setDouble(3,product.getPrice());
+            ps.setString(4,product.getDescription());
+            ps.setString(5,product.getImageURL());
+            ps.setString(6,product.getCreatedDate());
+            ps.setInt(7,product.getCategoryid());
+            ps.setInt(8, id);
+            
+            check=ps.executeUpdate();
+        } catch (Exception ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return check >0;
+    }
+
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
         List<Product> list = dao.getallPro();
@@ -178,14 +233,5 @@ public class ProductDAO {
             System.out.println(o);
         }
     }
-
-    
-    
-
-    
-
-    
-
-    
 
 }
