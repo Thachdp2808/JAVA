@@ -102,7 +102,12 @@
                                 </tbody>
 
                             </c:if>
+                                
                         </table>
+                        <div class="mb-3">
+                                <label for="note">Note</label>
+                                <textarea class="form-control" id="note" name="note" rows="5"></textarea>
+                            </div>
                         <h3>TotalMoney: $${Total}</h3>
                     </div>
                     <div class="col-md-4" style="border:1px solid #ccc ; border-radius:5px; padding:1rem">

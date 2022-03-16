@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Account;
 import model.Cart;
 import model.Product;
 
@@ -38,9 +39,12 @@ public class CartController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             int ProductID = Integer.parseInt(request.getParameter("ProductID"));
+             HttpSession session = request.getSession();
+            Account account = (Account) session.getAttribute("account");
+            if(account==null){
+                request.getRequestDispatcher("login").forward(request, response);
+            }
             Cart cart = new Cart();
-            
-            HttpSession session = request.getSession();
             Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
             if (carts == null) {
                 carts = new LinkedHashMap<>();

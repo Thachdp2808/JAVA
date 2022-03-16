@@ -38,6 +38,7 @@ public class HomeController extends HttpServlet {
         ProductDAO dao = new ProductDAO();
         List<Product> listPro = dao.getProbyCategoryid(6, 7);
         request.setAttribute("ListP", listPro);
+        request.getSession().setAttribute("URLHistory", "home");
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 

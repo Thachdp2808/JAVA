@@ -15,23 +15,21 @@ public class Order {
     private double totalPrice;
     private String note;
     private String createdDate;
-    private int ShippingId;
+    
     public Order(){
         
     }
-    public Order( int accountId, double totalPrice, String note, int ShippingId) {
+    public Order( int accountId, double totalPrice, String note) {
         this.accountId = accountId;
         this.totalPrice = totalPrice;
         this.note = note;
-        this.ShippingId = ShippingId;
     }
-    public Order(int id, int accountId, double totalPrice, String note, String createdDate, int ShippingId) {
+    public Order(int id, int accountId, double totalPrice, String note, String createdDate) {
         this.id = id;
         this.accountId = accountId;
         this.totalPrice = totalPrice;
         this.note = note;
         this.createdDate = createdDate;
-        this.ShippingId = ShippingId;
     }
 
     public int getId() {
@@ -72,14 +70,6 @@ public class Order {
 
     public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
-    }
-
-    public int getShippingId() {
-        return ShippingId;
-    }
-
-    public void setShippingId(int ShippingId) {
-        this.ShippingId = ShippingId;
     }
     
 }

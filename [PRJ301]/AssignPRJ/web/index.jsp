@@ -48,9 +48,19 @@
 								<li class="language">
 									<a href="#">English</a>
 								</li>
-								<li class="account">
-									<a href="#">My Account</a>
+                                                                <c:if test="${account!=null}">
+                                                                    <li class="account ">
+									<a href="">My Account</a>
 								</li>
+                                                                <li class="account">
+									<a href="login">Logout</a>
+								</li>
+                                                                </c:if>
+                                                                <c:if test="${account==null}">
+								<li class="account">
+									<a href="login">Login</a>
+								</li>
+                                                                </c:if>
 							</ul>
 						</div>
 					</div>

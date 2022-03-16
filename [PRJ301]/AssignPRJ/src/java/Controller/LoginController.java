@@ -97,7 +97,8 @@ public class LoginController extends HttpServlet {
             HttpSession session = request.getSession();
             if(account!=null){
                session.setAttribute("account", account);
-               session.setAttribute("accountid", account.getId());
+                String valueOf = String.valueOf(account.getId());
+               session.setAttribute("accountid", valueOf);
                session.setAttribute("a", account.getName());
                session.setAttribute("b", account.getPassword());
                 if(remember!=null){

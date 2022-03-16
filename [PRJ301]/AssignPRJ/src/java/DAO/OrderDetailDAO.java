@@ -22,8 +22,9 @@ import model.Cart;
 public class OrderDetailDAO {
 
     public void saveCart(int orderId, Map<Integer, Cart> carts) {
-        try {
+        
 
+        try {
             String sql = "INSERT INTO [Shopping].[dbo].[Detail]\n"
                     + "           ([order_id]\n"
                     + "           ,[productname]\n"
@@ -45,8 +46,9 @@ public class OrderDetailDAO {
                 ps.executeUpdate();
             }
         } catch (Exception ex) {
-            Logger.getLogger(ShippingDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OrderDetailDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
 }

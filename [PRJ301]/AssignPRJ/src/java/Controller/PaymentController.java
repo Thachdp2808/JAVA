@@ -8,7 +8,7 @@ package Controller;
 import DAO.OrderDAO;
 import DAO.OrderDetailDAO;
 import DAO.ProductDAO;
-import DAO.ShippingDAO;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedHashMap;
@@ -18,10 +18,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Account;
 import model.Cart;
 import model.Order;
 import model.Product;
-import model.Shipping;
 
 /**
  *
@@ -93,10 +93,14 @@ public class PaymentController extends HttpServlet {
         String address = request.getParameter("address");
         String email = request.getParameter("email");
         String note = request.getParameter("note");
-        ShippingDAO shipdao = new ShippingDAO();
         OrderDAO orderdao = new OrderDAO();
         OrderDetailDAO detaildao = new OrderDetailDAO();
         HttpSession session = request.getSession();
+        
+        Object objacc=session.getAttribute("account");
+        if(objacc!=null){
+            Account acc = (Account) objacc;
+        
         Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
         if (carts == null) {
             carts = new LinkedHashMap<>();
@@ -110,16 +114,15 @@ public class PaymentController extends HttpServlet {
         }
         //Lưu vào database
 
-        //Lưu vào Shipping
-        Shipping shipping = new Shipping(name, phone, address, email);
-        int shippingid = shipdao.returnid(shipping);// trả về id tự tăng của bản ghi vừa lưu vào database
         //Lưu vào Order
-        Order order = new Order(2,totalMoney,note,shippingid);
+        Order order = new Order(acc.getId(),totalMoney,note);
         int orderId = orderdao.returnid(order);
+        System.out.println();
         //Lưu vào OrderDetail
         detaildao.saveCart(orderId,carts);
         session.removeAttribute("carts");
         response.sendRedirect("thank");
+        }
     }
 
     /**

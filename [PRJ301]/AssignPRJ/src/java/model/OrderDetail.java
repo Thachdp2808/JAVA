@@ -15,17 +15,27 @@ public class OrderDetail {
     private String productName;
     private String productImage;
     private double productPrice;
+    private int productId;
     private int quantity;
     public OrderDetail(){
         
     }
-    public OrderDetail(int id, int orderId, String productName, String productImage, double productPrice, int quantity) {
+    public OrderDetail(int id, int orderId, String productName, String productImage, double productPrice,int productId, int quantity) {
         this.id = id;
         this.orderId = orderId;
         this.productName = productName;
         this.productImage = productImage;
         this.productPrice = productPrice;
+        this.productId=productId;
         this.quantity = quantity;
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public int getId() {
