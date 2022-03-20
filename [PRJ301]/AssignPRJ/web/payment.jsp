@@ -104,31 +104,18 @@
                             </c:if>
                                 
                         </table>
-                        <div class="mb-3">
-                                <label for="note">Note</label>
-                                <textarea class="form-control" id="note" name="note" rows="5"></textarea>
-                            </div>
+                        
                         <h3>TotalMoney: $${Total}</h3>
                     </div>
                     <div class="col-md-4" style="border:1px solid #ccc ; border-radius:5px; padding:1rem">
 
                         <form action="payment" method="post">
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="phone" name="name" aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-3">
-                                <label for="phone" class="form-label">Phone</label>
-                                <input type="text" class="form-control" id="phone" name="phone" aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-3">
-                                <label for="address" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="address" name="address" aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
-                            </div>
+                            <ul>
+                            <li>Name: ${name} </li>
+                            <li>Phone: ${phone}</li>
+                            <li>Address: ${address}</li>
+                            <li>Email: ${email}</li>
+                            </ul>
                             <div class="mb-3">
                                 <label for="note">Note</label>
                                 <textarea class="form-control" id="note" name="note" rows="7"></textarea>

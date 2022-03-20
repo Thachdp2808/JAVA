@@ -17,6 +17,7 @@ public class Account {
     private String address;
     private String email;
     private int phone;
+    public int rollid;
 
     public Account() {
     }
@@ -32,6 +33,14 @@ public class Account {
         this.address = address;
         this.email = email;
         this.phone = phone;
+    }
+
+    public int getRollid() {
+        return rollid;
+    }
+
+    public void setRollid(int rollid) {
+        this.rollid = rollid;
     }
 
     public int getId() {

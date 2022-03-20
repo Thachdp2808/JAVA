@@ -48,9 +48,14 @@
 								<li class="language">
 									<a href="#">English</a>
 								</li>
+                                                                <c:if test="${roll==2}">
+                                                                    <li class="account">
+									<a href="manager">Manager</a>
+								</li>
+                                                                </c:if>
                                                                 <c:if test="${account!=null}">
                                                                     <li class="account ">
-									<a href="">My Account</a>
+									<a href="">Hello ${disname}</a>
 								</li>
                                                                 <li class="account">
 									<a href="login">Logout</a>
@@ -80,8 +85,8 @@
 						<nav class="navbar">
 							<ul class="navbar_menu">
 								<li><a href="home">home</a></li>
-								<li><a href="productcontrol">Product</a></li>
-								<li><a href="contact.html">contact</a></li>
+								<li><a href="productcontrol">Shop</a></li>
+								<li><a href="#">contact</a></li>
 							</ul>
 							<ul class="navbar_user">
 								<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
@@ -106,12 +111,12 @@
 
 	<!-- Slider -->
 
-	<div class="main_slider" style="background-image:url(images/slider_1.jpg)">
+	<div class="main_slider" style="background-image:url(images/pexels-kate-trifo-3992002.jpg)">
 		<div class="container fill_height">
 			<div class="row align-items-center fill_height">
 				<div class="col">
 					<div class="main_slider_content">
-						<h6>Spring / Summer Collection 2017</h6>
+						<h6>Spring / Summer Collection 2022</h6>
 						<h1>Get up to 30% Off New Arrivals</h1>
 						<div class="red_button shop_now_button"><a href="productcontrol">Shop now</a></div>
 					</div>

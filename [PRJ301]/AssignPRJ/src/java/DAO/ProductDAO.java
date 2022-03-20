@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -48,6 +49,21 @@ public class ProductDAO {
         return list;
     }
 
+    public void delete(int Id) {
+        try {
+            String xSql = "delete from Product where id=?";
+            Connection conn = new DBConnect().getConnection();
+            PreparedStatement ps = conn.prepareStatement(xSql);
+            ps.setInt(1, Id);
+            ps.executeUpdate();
+            //con.commit();
+            ps.close();
+        } catch (Exception ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     public List<Product> getProbyID(int categoryid) {
         List<Product> list = new ArrayList<>();
         try {
@@ -73,31 +89,32 @@ public class ProductDAO {
         }
         return list;
     }
+
     public ArrayList<Product> pageProduct(int pageIndex) {
         ArrayList<Product> lp = new ArrayList<>();
         try {
-            
+
             String sql = "SELECT top 4 * \n"
                     + "FROM Product\n"
                     + "where id > ?\n"
                     + "ORDER BY id";
             Connection conn = new DBConnect().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, (pageIndex-1)*4);
+            ps.setInt(1, (pageIndex - 1) * 4);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Product p = new Product();
                 p.setId(rs.getInt(1));
                 p.setName(rs.getString(2));
                 lp.add(p);
             }
-            
-            
+
         } catch (Exception ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lp;
     }
+
     public int getallProbyID() {
 
         try {
@@ -196,7 +213,7 @@ public class ProductDAO {
     }
 
     public boolean update(Product product, int id) {
-        int check =0;
+        int check = 0;
         try {
             String sql = "UPDATE [Shopping].[dbo].[Product]\n"
                     + "   SET [name] = ?\n"
@@ -209,29 +226,64 @@ public class ProductDAO {
                     + " WHERE id=?";
             Connection conn = new DBConnect().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            
+
             ps.setString(1, product.getName());
-            ps.setInt(2,product.getQuantity());
-            ps.setDouble(3,product.getPrice());
-            ps.setString(4,product.getDescription());
-            ps.setString(5,product.getImageURL());
-            ps.setString(6,product.getCreatedDate());
-            ps.setInt(7,product.getCategoryid());
+            ps.setInt(2, product.getQuantity());
+            ps.setDouble(3, product.getPrice());
+            ps.setString(4, product.getDescription());
+            ps.setString(5, product.getImageURL());
+            ps.setString(6, product.getCreatedDate());
+            ps.setInt(7, product.getCategoryid());
             ps.setInt(8, id);
-            
-            check=ps.executeUpdate();
+
+            check = ps.executeUpdate();
         } catch (Exception ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return check >0;
+        return check > 0;
     }
 
-    public static void main(String[] args) {
+    public void insert(Product product) {
+        try {
+            String sql = "INSERT INTO [Shopping].[dbo].[Product]\n"
+                    + "           ([id]\n"
+                    + ",[name]\n"
+                    + "           ,[quantity]\n"
+                    + "           ,[price]\n"
+                    + "           ,[description]\n"
+                    + "           ,[imageUrl]\n"
+                    + "           ,[create_date]\n"
+                    + "           ,[Categoryid])\n"
+                    + "     VALUES\n"
+                    + "           (?,?,?,?,?,?,?,?)";
+            Connection conn = new DBConnect().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, product.getId());
+            ps.setString(2, product.getName());
+            ps.setInt(3, product.getQuantity());
+            ps.setDouble(4, product.getPrice());
+            ps.setString(5, product.getDescription());
+            ps.setString(6, product.getImageURL());
+            ps.setString(7, product.getCreatedDate());
+            ps.setInt(8, product.getCategoryid());
+            ps.executeUpdate();
+
+
+
+        } catch (Exception ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }
+
+public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
         List<Product> list = dao.getallPro();
         for (Product o : list) {
             System.out.println(o);
         }
     }
+
+    
 
 }

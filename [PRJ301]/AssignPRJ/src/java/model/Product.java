@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.sql.Date;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -30,7 +31,15 @@ public class Product {
     public Product(){
         
     }
+public Product( String name, int quantity, double price, String description, String imageURL, String createdDate, int categoryid) {
 
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+        this.description = description;
+        this.imageURL = imageURL;
+        this.createdDate = createdDate;
+}
     public Product(int id, String name, int quantity, double price, String description, String imageURL, String createdDate, int categoryid) {
         this.id = id;
         this.name = name;

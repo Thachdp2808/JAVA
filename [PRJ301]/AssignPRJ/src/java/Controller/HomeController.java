@@ -14,6 +14,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Account;
 import model.Category;
 import model.Product;
 
@@ -38,6 +40,13 @@ public class HomeController extends HttpServlet {
         ProductDAO dao = new ProductDAO();
         List<Product> listPro = dao.getProbyCategoryid(6, 7);
         request.setAttribute("ListP", listPro);
+        HttpSession session = request.getSession();
+        Object objacc = session.getAttribute("account");
+        if(objacc!=null){
+            Account acc = (Account) objacc;
+            request.setAttribute("disname", acc.getDisplayname());
+            request.setAttribute("roll", acc.getRollid());
+        }
         request.getSession().setAttribute("URLHistory", "home");
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }

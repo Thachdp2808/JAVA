@@ -28,6 +28,7 @@
         <div class="super_container">
 
             <!-- Header -->
+	<!-- Header -->
 	<header class="header trans_300">
 		<!-- Top Navigation -->
 		<div class="top_nav">
@@ -46,9 +47,14 @@
 								<li class="language">
 									<a href="#">English</a>
 								</li>
+                                                                <c:if test="${roll==2}">
+                                                                    <li class="account">
+									<a href="manager">Manager</a>
+								</li>
+                                                                </c:if>
                                                                 <c:if test="${account!=null}">
                                                                     <li class="account ">
-									<a href="">My Account</a>
+									<a href="">Hello ${disname}</a>
 								</li>
                                                                 <li class="account">
 									<a href="login">Logout</a>
@@ -78,8 +84,8 @@
 						<nav class="navbar">
 							<ul class="navbar_menu">
 								<li><a href="home">home</a></li>
-								<li><a href="productcontrol">Product</a></li>
-								<li><a href="contact.html">contact</a></li>
+								<li><a href="productcontrol">Shop</a></li>
+								<li><a href="#">contact</a></li>
 							</ul>
 							<ul class="navbar_user">
 								<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>

@@ -14,6 +14,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Account;
 import model.Category;
 import model.Product;
 
@@ -45,7 +47,7 @@ public class ProductController extends HttpServlet {
         Product product = p.getOneProbyID(1);
         request.setAttribute("product", product);
         int page = 1;
-        int page_size=24;
+        int page_size=12;
         //totalpage
         int totalProducts = p.getallProbyID();
         int totalPage = totalProducts/page_size;
@@ -58,6 +60,13 @@ public class ProductController extends HttpServlet {
         String pag = request.getParameter("page");
         if(pag!=null){
             page=Integer.parseInt(pag);
+        }
+        HttpSession session = request.getSession();
+        Object objacc = session.getAttribute("account");
+        if(objacc!=null){
+            Account acc = (Account) objacc;
+            request.setAttribute("disname", acc.getDisplayname());
+            request.setAttribute("roll", acc.getRollid());
         }
         request.setAttribute("page", page);
         request.getSession().setAttribute("URLHistory", "productcontrol");

@@ -21,7 +21,7 @@ import model.Cart;
  */
 public class OrderDetailDAO {
 
-    public void saveCart(int orderId, Map<Integer, Cart> carts) {
+    public void saveCart(int orderId, Map<Integer, Cart> carts,int id,int oldquantity) {
         
 
         try {
@@ -30,9 +30,10 @@ public class OrderDetailDAO {
                     + "           ,[productname]\n"
                     + "           ,[productimage]\n"
                     + "           ,[productPrice]\n"
+                    + "           ,[productid]\n"
                     + "           ,[quantity])\n"
                     + "     VALUES\n"
-                    + "           (?,?,?,?,?)";
+                    + "           (?,?,?,?,?,?)";
             Connection conn = new DBConnect().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1,orderId);
@@ -42,7 +43,8 @@ public class OrderDetailDAO {
                 ps.setString(2,cart.getProduct().getName());
                 ps.setString(3,cart.getProduct().getImageURL());
                 ps.setDouble(4,cart.getProduct().getPrice());
-                ps.setInt(5,cart.getProduct().getQuantity());
+                ps.setInt(5,id);
+                ps.setInt(6,oldquantity);
                 ps.executeUpdate();
             }
         } catch (Exception ex) {

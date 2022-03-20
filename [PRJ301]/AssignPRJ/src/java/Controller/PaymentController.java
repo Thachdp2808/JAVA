@@ -57,6 +57,14 @@ public class PaymentController extends HttpServlet {
                 totalMoney += cart.getQuantity() * cart.getProduct().getPrice();
             }
             request.setAttribute("Total", totalMoney);
+            Object objacc = session.getAttribute("account");
+            if (objacc != null) {
+                Account acc = (Account) objacc;
+                request.setAttribute("name", acc.getDisplayname());
+                request.setAttribute("phone", acc.getPhone());
+                request.setAttribute("address", acc.getAddress());
+                request.setAttribute("email", acc.getEmail());
+            }
 
             request.getRequestDispatcher("payment.jsp").forward(request, response);
         }
@@ -88,10 +96,6 @@ public class PaymentController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String name = request.getParameter("name");
-        String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
-        String email = request.getParameter("email");
         String note = request.getParameter("note");
         OrderDAO orderdao = new OrderDAO();
         ProductDAO p = new ProductDAO();
@@ -133,8 +137,8 @@ public class PaymentController extends HttpServlet {
             int quantityOfproduct = product.getQuantity();
             if (quantityOfproduct > 0 && oldquantity < quantityOfproduct) {
                 product.setQuantity(quantityOfproduct - oldquantity);
-                detaildao.saveCart(orderId, carts);
-                p.update(product,id);
+                detaildao.saveCart(orderId, carts, product.getId(), oldquantity);
+                p.update(product, id);
                 session.removeAttribute("carts");
                 response.sendRedirect("thank");
             }
