@@ -88,7 +88,8 @@
 								<li><a href="#">contact</a></li>
 							</ul>
 							<ul class="navbar_user">
-								<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                                                            <form action="Search">
+                                                            <li><input type="text" placeholder="Search.." name="search"> <button><i  class="fa fa-search" aria-hidden="true"></i></li>
 								<li><a href="login"><i class="fa fa-user" aria-hidden="true"></i></a></li>
 								<li class="checkout">
 									<a href="Checkout">
@@ -116,7 +117,7 @@
                         <div class="breadcrumbs d-flex flex-row align-items-center">
                             <ul>
                                 <li><a href="home">Home</a></li>
-                                <li class="active"><a href="productcontrol"><i class="fa fa-angle-right" aria-hidden="true"></i>Product</a></li>
+                                <li class="active"><a href="productcontrol"><i class="fa fa-angle-right" aria-hidden="true"></i>Shop</a></li>
                             </ul>
                         </div>
 
@@ -314,8 +315,8 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
-                                <input id="newsletter_email" type="email" placeholder="Your email" required="required" data-error="Valid email is required.">
-                                <button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">subscribe</button>
+                                <input id="newsletter_email" type="text" placeholder="Your email" required="required" data-error="Valid email is required.">
+                                <button id="newsletter_submit"  class="newsletter_submit_btn trans_300" value="Submit">subscribe</button>
                             </div>
                         </div>
                     </div>

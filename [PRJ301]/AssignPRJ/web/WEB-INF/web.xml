@@ -80,6 +80,10 @@
         <servlet-name>ForgotController</servlet-name>
         <servlet-class>Controller.ForgotController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>managerOrders</servlet-name>
+        <servlet-class>Controller.managerOrders</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -159,6 +163,10 @@
     <servlet-mapping>
         <servlet-name>ForgotController</servlet-name>
         <url-pattern>/forgot</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>managerOrders</servlet-name>
+        <url-pattern>/managerOrders</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

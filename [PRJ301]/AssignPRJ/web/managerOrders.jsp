@@ -1,13 +1,13 @@
 <%-- 
-    Document   : updateProduct
-    Created on : Mar 17, 2022, 4:03:16 AM
+    Document   : admin
+    Created on : Mar 17, 2022, 3:12:02 AM
     Author     : Happy-2001
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>Colo Shop Product</title>
         <meta charset="utf-8">
@@ -41,7 +41,7 @@
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
-                                                                <li><a href="manager">Manager Product</a></li>
+                                                            <li><a href="manager">Manager Product</a></li>
 								<li><a href="home">home</a></li>
 								<li><a href="productcontrol">Product</a></li>
 								<li><a href="#">contact</a></li>
@@ -66,40 +66,50 @@
 		</div>
 
 	</header>
-        <section class="py-5 px-4 px-lg-5 " style="padding-top:7rem !important;min-height: 500px">                                                              
-        <form action="addProduct" method="POST">
-            <table>
-                <tr>
-                    <td>ID:</td><td><input type="text" name="id" /></td>
-                </tr>
-                <tr>
-                    <td>Name:</td><td><input type="text" name="name"/></td>
-                </tr>
-                <tr>
-                    <td>Price:</td><td><input type="text" name="price"/></td>
-                </tr>
-                <tr>
-                    <td>Quantity:</td><td><input type="text" name="quantity"/></td>
-                </tr>
-                <tr>
-                    <td>Description:</td><td><input type="text" name="des"/></td>
-                </tr>
-                <tr>
-                    <td>ImageURL:</td><td><input type="text" name="image"/></td>
-                </tr>
-                <tr>
-                    <td>Created_Date:</td><td><input type="date" name="date"/></td>
-                </tr>
-                <tr>
-                    <td>CategoryID:</td><td><input type="text" name="categoryid"/></td>
-                </tr>
+        <section class="py-5 px-4 px-lg-5 " style="padding-top:7rem !important">
+            <div class="container" style="min-height: 500px">
+                <table class="table  table-hover">
+                    <c:if test="${sessionScope.carts.size()==0}">
+                        <h1>List is Empty</h1>
+                    </c:if>
+                    <c:if test="${sessionScope.carts.size()!=0}">
+                        <thead>
+                            <tr>
+                                <th scope="col">Order ID</th>
+                                <th scope="col">Account ID</th>
+                                <th scope="col">Total Price</th>
+                                <th scope="col">Note</th>
+                                <th scope="col">Create Date</th>
+                                <th scope="col">Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${ListO}" var="O">
+                            <form action="UpdateCheckout">
+                                <tr> 
+                                <input type="hidden" name="orderid" value="${O.id}">
+                                    <td>${O.id}</td>
+                                    <td>${O.accountId}</td>
+                                    <td>${O.totalPrice} $</td>
+                                    <td>${O.note}</td>
+                                    <td>${O.createdDate}</td>
+                                    <td>
+                                    <a class="btn btn-outline-danger" onclick ="Delete(${O.id})" ><i class="bi bi-trash"></i>Delete</a></td>
+                                </tr>
+                            </form>
+
+                        </c:forEach>
+
+                        </tbody>
+                    
+                    </c:if>
+                </table>
                 
                 
-                <tr><td><input type="submit" value="Create"/></td></tr>
-            </table>
-        </form>
+            </div>
         </section>
-                                                                        <!-- Footer -->
+       <!-- Footer -->
 
        <footer class="footer" style="background-color: #ccc">
 		<div class="container">
@@ -133,5 +143,17 @@
 			</div>
 		</div>
 	</footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+       function Delete(id){
+           var option = confirm('Are you sure to delete?');
+           if(option === true) {
+               window.location.href = 'DeleteProduct?id=' + id;
+           }
+       }
+   </script>
+        <script src="js/scripts.js"></script>
+
     </body>
 </html>

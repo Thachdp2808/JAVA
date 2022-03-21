@@ -41,6 +41,7 @@
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
+                                                            <li><a href="managerOrders">Manager Order</a></li>
                                                             <li><a href="addProduct">Add Product</a></li>
 								<li><a href="home">home</a></li>
 								<li><a href="productcontrol">Product</a></li>

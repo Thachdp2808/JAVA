@@ -5,22 +5,21 @@
  */
 package Controller;
 
-import DAO.LoginDAO;
+import DAO.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Account;
-import model.SendMail;
+import model.Order;
 
 /**
  *
  * @author Happy-2001
  */
-public class ForgotController extends HttpServlet {
+public class managerOrders extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,7 +34,10 @@ public class ForgotController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            request.getRequestDispatcher("forgot.jsp").forward(request, response);
+            OrderDAO order = new OrderDAO();
+            List<Order> listo = order.getallorder();
+            request.setAttribute("ListO", listo);
+            request.getRequestDispatcher("managerOrders.jsp").forward(request, response);
         }
     }
 
@@ -65,33 +67,7 @@ public class ForgotController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-        String mail = request.getParameter("mail");
-        SendMail sendmail = new SendMail();
-        LoginDAO loginDAO = new LoginDAO();
-        Account acc = loginDAO.getAccountByMail(mail);
-        String subject = "Your account has been processing.";
-        String message = "<!DOCTYPE html>\n"
-                + "<html lang=\"en\">\n"
-                + "\n"
-                + "<head>\n"
-                + "</head>\n"
-                + "\n"
-                + "<body>\n"
-                + "    <h3 style=\"color: blue;\">Your account has been processing.</h3>\n"
-                + "    <div>User Name :" + acc.getName() + "</div>\n"
-                + "    <div>Password :" + acc.getPassword() + "</div>\n"
-                + "    <div>Name : " + acc.getDisplayname() + "</div>\n"
-                + "    <div>address : " + acc.getAddress() + "</div>\n"
-                + "    <div>Phone : " + acc.getPhone() + "</div>\n"
-                + "    <h3 style=\"color: blue;\">Thank you very much!</h3>\n"
-                + "\n"
-                + "</body>\n"
-                + "\n"
-                + "</html>";
-        SendMail.send(mail, subject, message, "thachdp2808@gmail.com", "Phucthach2k1");
-        response.sendRedirect("login");
-
+        processRequest(request, response);
     }
 
     /**

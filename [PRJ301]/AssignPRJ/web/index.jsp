@@ -88,8 +88,10 @@
 								<li><a href="productcontrol">Shop</a></li>
 								<li><a href="#">contact</a></li>
 							</ul>
+                                                    
 							<ul class="navbar_user">
-								<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                                                            <form action="Search">
+                                                            <li><input type="text" placeholder="Search.." name="search"> <button><i  class="fa fa-search" aria-hidden="true"></i></li>
 								<li><a href="login"><i class="fa fa-user" aria-hidden="true"></i></a></li>
 								<li class="checkout">
 									<a href="Checkout">
@@ -98,6 +100,7 @@
 									</a>
 								</li>
 							</ul>
+                                                              </form>          
 							<div class="hamburger_container">
 								<i class="fa fa-bars" aria-hidden="true"></i>
 							</div>
@@ -281,7 +284,7 @@
 
 </div>
 
-
+<script src="js/jquery-3.2.1.min.js"></script>
 <script src="styles/bootstrap4/popper.js"></script>
 <script src="styles/bootstrap4/bootstrap.min.js"></script>
 <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
