@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>ArrayOfString</servlet-name>
+        <servlet-class>controller.ArrayOfString</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NameServlet</servlet-name>
+        <servlet-class>controller.NameServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NameServlet2</servlet-name>
+        <servlet-class>controller.NameServlet2</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>employee</servlet-name>
+        <servlet-class>controller.employee</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ArrayOfString</servlet-name>
+        <url-pattern>/arrayString</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NameServlet</servlet-name>
+        <url-pattern>/nameObjectArr</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NameServlet2</servlet-name>
+        <url-pattern>/nameObjectList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>employee</servlet-name>
+        <url-pattern>/employee</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
