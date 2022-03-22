@@ -21,7 +21,7 @@ import model.Cart;
  */
 public class OrderDetailDAO {
 
-    public void saveCart(int orderId, Map<Integer, Cart> carts,int id,int oldquantity) {
+    public void saveCart(int orderId, Map<Integer, Cart> carts) {
         
 
         try {
@@ -43,8 +43,8 @@ public class OrderDetailDAO {
                 ps.setString(2,cart.getProduct().getName());
                 ps.setString(3,cart.getProduct().getImageURL());
                 ps.setDouble(4,cart.getProduct().getPrice());
-                ps.setInt(5,id);
-                ps.setInt(6,oldquantity);
+                ps.setInt(5,cart.getProduct().getId());
+                ps.setInt(6,carts.get(cart.getProduct().getId()).getQuantity());
                 ps.executeUpdate();
             }
         } catch (Exception ex) {

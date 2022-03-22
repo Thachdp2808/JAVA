@@ -203,6 +203,7 @@
                                                         <div class="product_info">
                                                             <h6 class="product_name"><a href="item">${P.name}</a></h6>
                                                             <div class="product_price">${P.price} $</div>
+                                                            <div class="product_price">${P.suppliers}</div>
                                                             
                                                         </div>
                                                             </a>

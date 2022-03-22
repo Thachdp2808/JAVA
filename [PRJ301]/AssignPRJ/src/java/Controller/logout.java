@@ -5,25 +5,19 @@
  */
 package Controller;
 
-import DAO.OrderDAO;
-import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Account;
-import model.Order;
-import model.Product;
 
 /**
  *
  * @author Happy-2001
  */
-public class managerOrders extends HttpServlet {
+public class logout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,19 +32,9 @@ public class managerOrders extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
             Object objacc = session.getAttribute("account");
-            if (objacc != null) {
-                Account acc = (Account) objacc;
-                if (acc.getRollid() == 2) {
-                    OrderDAO order = new OrderDAO();
-                    List<Order> listo = order.getallorder();
-                    request.setAttribute("ListO", listo);
-                    request.getRequestDispatcher("managerOrders.jsp").forward(request, response);
-                }  
-                
-            } 
+            session.removeAttribute("account");
             response.sendRedirect("login");
         }
     }

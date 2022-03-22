@@ -39,7 +39,8 @@ public class ProductDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getInt(8)));
+                        rs.getInt(8),
+                        rs.getString(9)));
 
             }
 
@@ -80,7 +81,8 @@ public class ProductDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getInt(8)));
+                        rs.getInt(8),
+                        rs.getString(9)));
 
             }
 
@@ -149,7 +151,8 @@ public class ProductDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getInt(8)));
+                        rs.getInt(8),
+                        rs.getString(9)));
 
             }
 
@@ -175,7 +178,8 @@ public class ProductDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getInt(8));
+                        rs.getInt(8),
+                        rs.getString(9));
                 return product;
 
             }
@@ -203,7 +207,8 @@ public class ProductDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getInt(8)));
+                        rs.getInt(8),
+                        rs.getString(9)));
 
             }
         } catch (Exception ex) {
@@ -223,6 +228,7 @@ public class ProductDAO {
                     + "      ,[imageUrl] = ?\n"
                     + "      ,[create_date] = ?\n"
                     + "      ,[Categoryid] = ?\n"
+                    + "      ,[Suppliers] = ?\n"
                     + " WHERE id=?";
             Connection conn = new DBConnect().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -234,7 +240,9 @@ public class ProductDAO {
             ps.setString(5, product.getImageURL());
             ps.setString(6, product.getCreatedDate());
             ps.setInt(7, product.getCategoryid());
-            ps.setInt(8, id);
+
+            ps.setInt(9, id);
+            ps.setString(8, product.getSuppliers());
 
             check = ps.executeUpdate();
         } catch (Exception ex) {
@@ -247,15 +255,16 @@ public class ProductDAO {
         try {
             String sql = "INSERT INTO [Shopping].[dbo].[Product]\n"
                     + "           ([id]\n"
-                    + ",[name]\n"
+                    + "           ,[name]\n"
                     + "           ,[quantity]\n"
                     + "           ,[price]\n"
                     + "           ,[description]\n"
                     + "           ,[imageUrl]\n"
                     + "           ,[create_date]\n"
-                    + "           ,[Categoryid])\n"
+                    + "           ,[Categoryid]\n"
+                    + "           ,[Suppliers])\n"
                     + "     VALUES\n"
-                    + "           (?,?,?,?,?,?,?,?)";
+                    + "           (?,?,?,?,?,?,?,?,?)";
             Connection conn = new DBConnect().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, product.getId());
@@ -266,24 +275,22 @@ public class ProductDAO {
             ps.setString(6, product.getImageURL());
             ps.setString(7, product.getCreatedDate());
             ps.setInt(8, product.getCategoryid());
+            ps.setString(9, product.getSuppliers());
+
             ps.executeUpdate();
-
-
 
         } catch (Exception ex) {
             Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+
     }
 
-public static void main(String[] args) {
+    public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
         List<Product> list = dao.getallPro();
         for (Product o : list) {
             System.out.println(o);
         }
     }
-
-    
 
 }

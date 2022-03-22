@@ -93,6 +93,9 @@
                 <tr>
                     <td>CategoryID:</td><td><input type="text" name="categoryid"/></td>
                 </tr>
+                <tr>
+                    <td>Suppliers:</td><td><input type="text" name="suppliers"/></td>
+                </tr>
                 
                 
                 <tr><td><input type="submit" value="Create"/></td></tr>

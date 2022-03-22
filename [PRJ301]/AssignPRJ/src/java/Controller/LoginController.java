@@ -97,27 +97,24 @@ public class LoginController extends HttpServlet {
             HttpSession session = request.getSession();
             if(account!=null){
                session.setAttribute("account", account);
-                String valueOf = String.valueOf(account.getId());
-               session.setAttribute("accountid", valueOf);
                session.setAttribute("a", account.getName());
                session.setAttribute("b", account.getPassword());
                 if(remember!=null){
                     Cookie u = new Cookie("username",username);
                     Cookie p = new Cookie("password",password);
                     Cookie detail = new Cookie("detail",account.getDisplayname());
-                    u.setMaxAge(20);
-                    p.setMaxAge(20);
-                    detail.setMaxAge(20);
+                    u.setMaxAge(3600);
+                    p.setMaxAge(3600);
+                    detail.setMaxAge(3600);
                     response.addCookie(u);
                     response.addCookie(p);
                     response.addCookie(detail);
-                    
                 }
                 response.sendRedirect("account");
                 
             }else{
-                
-                response.sendRedirect("login.jsp");
+                request.setAttribute("err", "Wrong Usernam or Password");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             }
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);

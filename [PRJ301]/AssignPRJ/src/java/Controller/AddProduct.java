@@ -5,13 +5,18 @@
  */
 package Controller;
 
+import DAO.OrderDAO;
 import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Account;
+import model.Order;
 import model.Product;
 
 /**
@@ -33,8 +38,17 @@ public class AddProduct extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            request.getRequestDispatcher("addProduct.jsp").forward(request, response);
+            HttpSession session = request.getSession();
+            Object objacc = session.getAttribute("account");
+            if (objacc != null) {
+                Account acc = (Account) objacc;
+                if (acc.getRollid() == 2) {
+                    request.getRequestDispatcher("addProduct.jsp").forward(request, response);
+                }  
+                
+            } 
+            response.sendRedirect("login");
+            
         }
     }
 
@@ -66,19 +80,20 @@ public class AddProduct extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-        String name,image,date;
-        int id = Integer.parseInt(request.getParameter("id"));
-        name = request.getParameter("name");
-        double price = Double.parseDouble(request.getParameter("price"));
-        String des = request.getParameter("des");
-        int quantity = Integer.parseInt(request.getParameter("quantity"));
-        date = request.getParameter("date");
-        image =request.getParameter("image");
-        int categoryid = Integer.parseInt(request.getParameter("categoryid"));
-        Product x = new Product(id,name, quantity, price,des,image, date,categoryid);
-        ProductDAO u = new ProductDAO();
-        u.insert(x);
-       request.getRequestDispatcher("manager").forward(request, response);
+            String name, image, date;
+            int id = Integer.parseInt(request.getParameter("id"));
+            name = request.getParameter("name");
+            double price = Double.parseDouble(request.getParameter("price"));
+            String des = request.getParameter("des");
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            date = request.getParameter("date");
+            image = request.getParameter("image");
+            String suppliers = request.getParameter("suppliers");
+            int categoryid = Integer.parseInt(request.getParameter("categoryid"));
+            Product x = new Product(id, name, quantity, price, des, image, date, categoryid,suppliers);
+            ProductDAO u = new ProductDAO();
+            u.insert(x);
+            request.getRequestDispatcher("manager").forward(request, response);
         }
     }
 

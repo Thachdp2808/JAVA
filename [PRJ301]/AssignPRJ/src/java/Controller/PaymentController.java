@@ -45,6 +45,7 @@ public class PaymentController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
+            
             Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
             if (carts == null) {
                 carts = new LinkedHashMap<>();
@@ -58,15 +59,19 @@ public class PaymentController extends HttpServlet {
             }
             request.setAttribute("Total", totalMoney);
             Object objacc = session.getAttribute("account");
-            if (objacc != null) {
+            if (objacc != null ) {
                 Account acc = (Account) objacc;
                 request.setAttribute("name", acc.getDisplayname());
                 request.setAttribute("phone", acc.getPhone());
                 request.setAttribute("address", acc.getAddress());
                 request.setAttribute("email", acc.getEmail());
-            }
+            
 
             request.getRequestDispatcher("payment.jsp").forward(request, response);
+                
+            }else{
+                response.sendRedirect("login");
+            }
         }
     }
 
@@ -101,7 +106,7 @@ public class PaymentController extends HttpServlet {
         ProductDAO p = new ProductDAO();
         OrderDetailDAO detaildao = new OrderDetailDAO();
         HttpSession session = request.getSession();
-
+        
         Object objacc = session.getAttribute("account");
         if (objacc != null) {
             Account acc = (Account) objacc;
@@ -137,12 +142,15 @@ public class PaymentController extends HttpServlet {
             int quantityOfproduct = product.getQuantity();
             if (quantityOfproduct > 0 && oldquantity < quantityOfproduct) {
                 product.setQuantity(quantityOfproduct - oldquantity);
-                detaildao.saveCart(orderId, carts, product.getId(), oldquantity);
+                detaildao.saveCart(orderId, carts);
                 p.update(product, id);
+                session.setAttribute("size", 0);
                 session.removeAttribute("carts");
                 response.sendRedirect("thank");
             }
 
+        }else{
+            response.sendRedirect("login");
         }
     }
 

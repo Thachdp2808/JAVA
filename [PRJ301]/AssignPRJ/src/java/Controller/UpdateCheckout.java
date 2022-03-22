@@ -46,6 +46,9 @@ public class UpdateCheckout extends HttpServlet {
             if(carts.containsKey(id)){
                 carts.get(id).setQuantity(quantity);
             }
+            if(carts.get(id).getQuantity()<=0){
+                carts.remove(id);
+            }
             session.setAttribute("carst", carts);
             response.sendRedirect("Checkout");
         }

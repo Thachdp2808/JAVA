@@ -13,6 +13,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Account;
 import model.Product;
 
 /**
@@ -35,10 +37,19 @@ public class ManagerController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            ProductDAO p = new ProductDAO();
-            List<Product> lst = p.getallPro();
-            request.setAttribute("ListP", lst);
-            request.getRequestDispatcher("admin.jsp").forward(request, response);
+            HttpSession session = request.getSession();
+            Object objacc = session.getAttribute("account");
+            if (objacc != null) {
+                Account acc = (Account) objacc;
+                if (acc.getRollid() == 2) {
+                    ProductDAO p = new ProductDAO();
+                    List<Product> lst = p.getallPro();
+                    request.setAttribute("ListP", lst);
+                    request.getRequestDispatcher("admin.jsp").forward(request, response);
+                }  
+                
+            } 
+            response.sendRedirect("login");
         }
     }
 

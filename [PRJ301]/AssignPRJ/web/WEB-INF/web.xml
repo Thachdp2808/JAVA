@@ -84,6 +84,10 @@
         <servlet-name>managerOrders</servlet-name>
         <servlet-class>Controller.managerOrders</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>logout</servlet-name>
+        <servlet-class>Controller.logout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -167,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>managerOrders</servlet-name>
         <url-pattern>/managerOrders</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

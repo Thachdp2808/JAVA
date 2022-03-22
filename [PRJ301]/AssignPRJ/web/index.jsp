@@ -58,7 +58,9 @@
 									<a href="">Hello ${disname}</a>
 								</li>
                                                                 <li class="account">
-									<a href="login">Logout</a>
+                                                                    
+									<a href="logout">Logout</a>
+                                                                        
 								</li>
                                                                 </c:if>
                                                                 <c:if test="${account==null}">

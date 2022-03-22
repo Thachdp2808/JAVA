@@ -88,13 +88,14 @@ public class UpdateProduct extends HttpServlet {
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         date = request.getParameter("date");
         image =request.getParameter("image");
+        String suppliers =request.getParameter("suppliers");
         int categoryid = Integer.parseInt(request.getParameter("categoryid"));
         boolean isOk = true;
         if (name == null || name.trim().length() == 0) {
             name = "";
             isOk = false;
         }
-        Product x = new Product(Id,name, quantity, price,des,image, date,categoryid);
+        Product x = new Product(Id,name, quantity, price,des,image, date,categoryid,suppliers);
         ProductDAO u = new ProductDAO();
         u.update(x,Id);
         if (!isOk) {
