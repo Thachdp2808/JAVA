@@ -1,0 +1,57 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package student;
+
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.Scanner;
+
+/**
+ *
+ * @author PV
+ */
+public class Main {
+
+    public static void main(String[] args) {
+        
+        Scanner sc = new Scanner(System.in);
+        Student t = new Student();
+        //Student ar[] = new Student[100];
+        //int count=0;
+        t.setName("Nguyễn Mạnh Hưng");
+        t.setStudentId("HE151211");
+        LocalDate temp = LocalDate.of(2001, Month.AUGUST, 24);
+        t.setBirthDate(temp);   
+        t.setAddress("Hưng Yên City");
+        t.setMajor("Software Engineering");
+        t.setGpa(4.5);
+        t.printAllAttributes();
+        }
+
+    }
+
+
+/*
+     for(int i=0;i<number;++i) {
+            
+            Student t = new Student();
+            System.out.print("Enter Student Name: ");
+            t.setName(sc.next());
+            System.out.print("Enter Student ID: ");
+            t.setStudentId(sc.next());
+            //System.out.print("Enter Date of birth: ");
+            LocalDate temp = LocalDate.of(2017, Month.MAY, 15);
+            t.setBirthDate(temp);       
+            System.out.print("Enter Address: ");
+            t.setAddress(sc.next());
+            System.out.print("Enter Major: ");
+            t.setMajor(sc.next());
+            System.out.print("Enter GPA: ");
+            t.setGpa(sc.nextDouble());
+            ar[count++]=t;
+            System.out.println("");
+        }
+*/
