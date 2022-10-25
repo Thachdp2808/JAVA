@@ -92,8 +92,8 @@
 							</ul>
                                                     
 							<ul class="navbar_user">
-                                                            <form action="Search">
-                                                            <li><input type="text" placeholder="Search.." name="search"> <button><i  class="fa fa-search" aria-hidden="true"></i></li>
+                                                            
+                                                            
 								<li><a href="login"><i class="fa fa-user" aria-hidden="true"></i></a></li>
 								<li class="checkout">
 									<a href="Checkout">
@@ -102,7 +102,7 @@
 									</a>
 								</li>
 							</ul>
-                                                              </form>          
+                                                                        
 							<div class="hamburger_container">
 								<i class="fa fa-bars" aria-hidden="true"></i>
 							</div>

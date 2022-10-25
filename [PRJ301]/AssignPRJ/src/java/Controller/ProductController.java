@@ -9,6 +9,7 @@ import DAO.CategoryDAO;
 import DAO.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -47,20 +48,23 @@ public class ProductController extends HttpServlet {
         Product product = p.getOneProbyID(1);
         request.setAttribute("product", product);
         int page = 1;
-        int page_size=12;
+        int page_size = 12;
         //totalpage
-        int totalProducts = p.getallProbyID();
-        int totalPage = totalProducts/page_size;
-        if(totalProducts % totalPage !=0){
-            totalPage +=1;
+        ProductDAO dao =new ProductDAO();
+        int totalProducts = dao.getallProbyID();
+        int totalPage = totalProducts / page_size;
+        if (totalProducts % page_size != 0) {
+            totalPage += 1;
         }
         request.setAttribute("totalproduct", totalProducts);
         request.setAttribute("totalPage", totalPage);
         //Setpage
         String pag = request.getParameter("page");
-        if(pag!=null){
-            page=Integer.parseInt(pag);
+        if (pag != null) {
+            page = Integer.parseInt(pag);
+
         }
+        ArrayList<Product> emp1 = dao.paging(page, page_size);
         HttpSession session = request.getSession();
         Object objacc = session.getAttribute("account");
         if(objacc!=null){
@@ -70,7 +74,7 @@ public class ProductController extends HttpServlet {
         }
         request.setAttribute("page", page);
         request.getSession().setAttribute("URLHistory", "productcontrol");
-        request.setAttribute("ListP", lst.subList((page-1)*page_size,page*page_size));
+        request.setAttribute("ListP", emp1);
         request.getRequestDispatcher("product.jsp").forward(request, response);
         }
     }

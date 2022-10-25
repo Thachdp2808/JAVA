@@ -229,7 +229,9 @@
                                                     </ul>
                                                 </li>
                                             </ul>
-                                            <span class="showing_results">Showing 1–3 of 12 results</span>
+                                            <div class="col-sm-12 col-md-5 p-0">
+                            
+                        </div>
                                             <div class="pages d-flex flex-row align-items-center">
                                                 <c:choose>
                                                     <c:when test="${ListP==null || ListP.size()==0}">Not Found</c:when>

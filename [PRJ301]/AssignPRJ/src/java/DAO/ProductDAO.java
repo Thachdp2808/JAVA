@@ -275,6 +275,36 @@ public class ProductDAO {
         }
 
     }
+    
+     public ArrayList<Product> paging(int page, int page_size) {
+        ArrayList<Product> employee = new ArrayList<>();
+        try {
+
+            String sql = "SELECT * FROM Product ORDER BY id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+            Connection conn = new DBConnect().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, (page - 1) * page_size);
+            ps.setInt(2, page_size);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product a = new Product();
+                a.setId(rs.getInt(1));
+                a.setName(rs.getString(2));
+                a.setQuantity(rs.getInt(3));
+                a.setPrice(rs.getInt(4));
+                a.setDescription(rs.getString(5));
+                a.setImageURL(rs.getString(6));
+                a.setCreatedDate(rs.getString(7));
+                a.setCategoryid(rs.getInt(8));
+
+                employee.add(a);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return employee;
+    }
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
