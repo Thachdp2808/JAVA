@@ -158,16 +158,18 @@
 						<!-- Product 3 -->
                                                 <c:forEach items="${ListP}" var="P">
 						<div class="product-item women">
+                                                    <a href="item?Product=${P.id}">
 							<div class="product product_filter">
 								<div class="product_image">
 									<img src="${P.imageURL}" alt="">
 								</div>
 								<div class="favorite"></div>
 								<div class="product_info">
-									<h6 class="product_name"><a href="single.html">${P.name}</a></h6>
+									<h6 class="product_name"><a href="item?Product=${P.id}">${P.name}</a></h6>
 									<div class="product_price">${P.price} $</div>
 								</div>
 							</div>
+                                                                </a>
 							<div class="red_button add_to_cart_button"><a href="Cart?ProductID=${P.id}">add to cart</a></div>
 						</div>
                                                 </c:forEach>

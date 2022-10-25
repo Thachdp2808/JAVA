@@ -39,8 +39,8 @@ public class ProductDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getInt(8),
-                        rs.getString(9)));
+                        rs.getInt(8)
+                ));
 
             }
 
@@ -81,8 +81,7 @@ public class ProductDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getInt(8),
-                        rs.getString(9)));
+                        rs.getInt(8)));
 
             }
 
@@ -151,8 +150,7 @@ public class ProductDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getInt(8),
-                        rs.getString(9)));
+                        rs.getInt(8)));
 
             }
 
@@ -178,8 +176,7 @@ public class ProductDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getInt(8),
-                        rs.getString(9));
+                        rs.getInt(8));
                 return product;
 
             }
@@ -207,8 +204,7 @@ public class ProductDAO {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getInt(8),
-                        rs.getString(9)));
+                        rs.getInt(8)));
 
             }
         } catch (Exception ex) {
@@ -220,15 +216,14 @@ public class ProductDAO {
     public boolean update(Product product, int id) {
         int check = 0;
         try {
-            String sql = "UPDATE [Shopping].[dbo].[Product]\n"
-                    + "   SET [name] = ?\n"
+            String sql = "UPDATE [dbo].[Product]\n"
+                    + "      SET [name] = ?\n"
                     + "      ,[quantity] = ?\n"
                     + "      ,[price] = ?\n"
                     + "      ,[description] = ?\n"
                     + "      ,[imageUrl] = ?\n"
-                    + "      ,[create_date] = ?\n"
-                    + "      ,[Categoryid] = ?\n"
-                    + "      ,[Suppliers] = ?\n"
+                    + "      ,[create_date] = ?\n" 
+                    +  "      ,[Categoryid] = ?\n"
                     + " WHERE id=?";
             Connection conn = new DBConnect().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -241,8 +236,7 @@ public class ProductDAO {
             ps.setString(6, product.getCreatedDate());
             ps.setInt(7, product.getCategoryid());
 
-            ps.setInt(9, id);
-            ps.setString(8, product.getSuppliers());
+            ps.setInt(8, id);
 
             check = ps.executeUpdate();
         } catch (Exception ex) {
@@ -261,10 +255,9 @@ public class ProductDAO {
                     + "           ,[description]\n"
                     + "           ,[imageUrl]\n"
                     + "           ,[create_date]\n"
-                    + "           ,[Categoryid]\n"
-                    + "           ,[Suppliers])\n"
+                    + "           ,[Categoryid]\n)"
                     + "     VALUES\n"
-                    + "           (?,?,?,?,?,?,?,?,?)";
+                    + "           (?,?,?,?,?,?,?,?)";
             Connection conn = new DBConnect().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, product.getId());
@@ -275,8 +268,6 @@ public class ProductDAO {
             ps.setString(6, product.getImageURL());
             ps.setString(7, product.getCreatedDate());
             ps.setInt(8, product.getCategoryid());
-            ps.setString(9, product.getSuppliers());
-
             ps.executeUpdate();
 
         } catch (Exception ex) {
@@ -287,10 +278,12 @@ public class ProductDAO {
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-        List<Product> list = dao.getallPro();
-        for (Product o : list) {
-            System.out.println(o);
-        }
+//        List<Product> list = dao.getallPro();
+//        for (Product o : list) {
+//            System.out.println(o);
+//        }
+        Product x = new Product(51,"a", 1, 1,"b","c", "03/27/2002",1);
+         dao.insert(x);
     }
 
 }

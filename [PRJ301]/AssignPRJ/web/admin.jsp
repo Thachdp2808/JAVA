@@ -83,7 +83,6 @@
                                 <th scope="col">Quantity</th>
                                 <th scope="col">Cretea_Date</th>
                                 <th scope="col">CategoryID</th>
-                                <th scope="col">Suppliers</th>
                                 <th scope="col">Action</th>
 
                             </tr>
@@ -100,7 +99,6 @@
                                     <td>${P.quantity}</td>
                                     <td>${P.createdDate}</td>
                                     <td>${P.categoryid}</td>
-                                    <td>${P.suppliers}</td>
                                     <td><a class="btn btn-outline-danger" href="UpdateProduct?id=${P.id}" style="padding: 6px"><i class="bi bi-trash"></i>Edit</a>
                                     <a class="btn btn-outline-danger" onclick ="Delete(${P.id})" style="padding: 6px"><i class="bi bi-trash"></i>Delete</a></td>
                                 </tr>

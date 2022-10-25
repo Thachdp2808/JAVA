@@ -88,9 +88,8 @@ public class AddProduct extends HttpServlet {
             int quantity = Integer.parseInt(request.getParameter("quantity"));
             date = request.getParameter("date");
             image = request.getParameter("image");
-            String suppliers = request.getParameter("suppliers");
             int categoryid = Integer.parseInt(request.getParameter("categoryid"));
-            Product x = new Product(id, name, quantity, price, des, image, date, categoryid,suppliers);
+            Product x = new Product(id, name, quantity, price, des, image, date, categoryid);
             ProductDAO u = new ProductDAO();
             u.insert(x);
             request.getRequestDispatcher("manager").forward(request, response);

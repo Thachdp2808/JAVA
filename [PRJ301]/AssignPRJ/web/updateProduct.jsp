@@ -92,9 +92,7 @@
                 <tr>
                     <td>CategoryID:</td><td><input type="text" name="categoryid" value="${product.categoryid}"/></td>
                 </tr>
-                <tr>
-                    <td>Suppliers:</td><td><input type="text" name="suppliers" value="${product.suppliers}"/></td>
-                </tr>
+                
                 
                 
                 <tr><td><input type="submit" value="Update"/></td></tr>

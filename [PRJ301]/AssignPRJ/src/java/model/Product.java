@@ -28,19 +28,18 @@ public class Product {
     private String imageURL;
     private String createdDate;
     private int categoryid;
-    private String suppliers;
     public Product(){
         
     }
-//public Product( String name, int quantity, double price, String description, String imageURL, String createdDate, int categoryid) {
-//
-//        this.name = name;
-//        this.quantity = quantity;
-//        this.price = price;
-//        this.description = description;
-//        this.imageURL = imageURL;
-//        this.createdDate = createdDate;
-//}
+public Product( String name, int quantity, double price, String description, String imageURL, String createdDate, int categoryid) {
+
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+        this.description = description;
+        this.imageURL = imageURL;
+        this.createdDate = createdDate;
+}
     public Product(int id, String name, int quantity, double price, String description, String imageURL, String createdDate, int categoryid) {
         this.id = id;
         this.name = name;
@@ -51,24 +50,7 @@ public class Product {
         this.createdDate = createdDate;
         this.categoryid = categoryid;
     }
-    public Product(int id, String name, int quantity, double price, String description, String imageURL, String createdDate, int categoryid,String suppliers) {
-        this.id = id;
-        this.name = name;
-        this.quantity = quantity;
-        this.price = price;
-        this.description = description;
-        this.imageURL = imageURL;
-        this.createdDate = createdDate;
-        this.categoryid = categoryid;
-        this.suppliers=suppliers;
-    }
-    public String getSuppliers() {
-        return suppliers;
-    }
-
-    public void setSuppliers(String suppliers) {
-        this.suppliers = suppliers;
-    }
+    
     public int getId() {
         return id;
     }
